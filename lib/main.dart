@@ -1,4 +1,5 @@
 import 'package:fgo/routes/routes.dart';
+import 'package:fgo/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -13,10 +14,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       title: 'Đặt xe đường dài',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      initialRoute: RoutesClass.home,
+      theme: FgoTheme.lightTheme,
+      initialRoute: RoutesClass.splash,
       getPages: RoutesClass.routes,
     );
   }

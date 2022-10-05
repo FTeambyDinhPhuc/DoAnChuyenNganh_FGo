@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:fgo/models/ProductModel.dart';
+import 'package:fgo/models/product_model.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 

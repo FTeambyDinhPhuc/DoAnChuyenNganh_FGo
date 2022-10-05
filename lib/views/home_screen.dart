@@ -1,4 +1,4 @@
-import 'package:fgo/controllers/ProductController.dart';
+import 'package:fgo/controllers/product_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
