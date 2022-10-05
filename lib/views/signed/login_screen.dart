@@ -77,23 +77,13 @@ class Login extends StatelessWidget {
       children: [
         MaterialButton(
           height: 55,
-          color: Colors.blue,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Icon(
-                Icons.facebook,
-                color: Colors.white,
-              ),
-              const SizedBox(width: defaultPadding),
-              Text(
-                "Đăng nhập bằng Facebook",
-                style: Theme.of(context)
-                    .textTheme
-                    .button!
-                    .copyWith(color: Colors.white),
-              ),
-            ],
+          color: Theme.of(context).primaryColor,
+          child: Text(
+            "Đăng nhập bằng số điện thoại",
+            style: Theme.of(context)
+                .textTheme
+                .button!
+                .copyWith(color: Colors.white),
           ),
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(16.0)),
@@ -117,18 +107,28 @@ class Login extends StatelessWidget {
         ),
         MaterialButton(
           height: 55,
-          color: Theme.of(context).primaryColor,
-          child: Text(
-            "Đăng nhập bằng số điện thoại",
-            style: Theme.of(context)
-                .textTheme
-                .button!
-                .copyWith(color: Colors.white),
+          color: Colors.blue,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(
+                Icons.facebook,
+                color: Colors.white,
+              ),
+              const SizedBox(width: defaultPadding),
+              Text(
+                "Đăng nhập bằng Facebook",
+                style: Theme.of(context)
+                    .textTheme
+                    .button!
+                    .copyWith(color: Colors.white),
+              ),
+            ],
           ),
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(16.0)),
           onPressed: () {},
-        )
+        ),
       ],
     );
   }
