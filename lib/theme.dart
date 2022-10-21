@@ -4,6 +4,8 @@ class FgoTheme {
   static final lightTheme = ThemeData(
       fontFamily: "OpenSans",
       primaryColor: Colors.teal,
+      appBarTheme: AppBarTheme(color: Colors.teal),
+      scaffoldBackgroundColor: Colors.white,
       textTheme: TextTheme(
         headline1: TextStyle(
           color: Color(0xFF1B070B),
@@ -47,7 +49,7 @@ class FgoTheme {
         ),
         button: TextStyle(
           color: Color(0xFF1B070B),
-          fontWeight: FontWeight.w500,
+          fontWeight: FontWeight.w700,
           fontSize: 16,
         ),
       ));
