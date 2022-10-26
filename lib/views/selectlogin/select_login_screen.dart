@@ -1,8 +1,8 @@
 import 'package:fgo/constants.dart';
+import 'package:fgo/widgets/text_question_select.dart';
 import 'package:flutter/material.dart';
 import 'components/button_login.dart';
 import 'components/image_top.dart';
-import 'components/text_question_select.dart';
 
 class Login extends StatelessWidget {
   const Login({super.key});
@@ -18,6 +18,7 @@ class Login extends StatelessWidget {
                 right: defaultPadding,
                 bottom: defaultPadding),
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 ImageTop(),
                 ButtonLogin(),
@@ -25,9 +26,7 @@ class Login extends StatelessWidget {
                 TextQuestionSelect(
                   question: "Chưa có tài khoản? ",
                   select: "Đăng ký",
-                  press: () {
-                    print("hihi");
-                  },
+                  press: () {},
                 )
               ],
             ),

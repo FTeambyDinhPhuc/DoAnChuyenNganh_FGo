@@ -1,9 +1,10 @@
 import 'package:fgo/constants.dart';
 import 'package:fgo/routes/routes.dart';
+import 'package:fgo/widgets/button_full_width.dart';
+import 'package:fgo/widgets/or_divider.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
-import 'or_divider.dart';
 
 class ButtonLogin extends StatelessWidget {
   const ButtonLogin({
@@ -62,20 +63,13 @@ class ButtonLogin extends StatelessWidget {
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(16.0)),
           onPressed: () {},
         ),
-        OrDivider(),
-        MaterialButton(
-          height: heightButton,
-          color: Theme.of(context).primaryColor,
-          child: Text(
-            "Đăng nhập bằng số điện thoại",
-            style: Theme.of(context)
-                .textTheme
-                .button!
-                .copyWith(color: Colors.white),
-          ),
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(16.0)),
-          onPressed: () {
+        Padding(
+          padding: const EdgeInsets.only(top: 22, bottom: 17),
+          child: OrDivider(),
+        ),
+        ButtonFullWidth(
+          text: "Đăng nhập bằng số điện thoại",
+          press: () {
             Get.toNamed(RoutesClass.loginWithPhoneNumber);
           },
         ),

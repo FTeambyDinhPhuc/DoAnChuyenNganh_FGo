@@ -32,9 +32,9 @@ class ImageTop extends StatelessWidget {
   double _sizeImage() {
     double size = 0;
     if (Get.width < Get.height) {
-      size = Get.width * 0.7;
+      size = Get.width * 0.75;
     } else {
-      size = Get.height * 0.7;
+      size = Get.height * 0.75;
     }
     return size;
   }

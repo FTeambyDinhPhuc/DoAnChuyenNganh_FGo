@@ -1,9 +1,8 @@
-import 'package:fgo/views/signed/login_screen.dart';
-import 'package:fgo/views/signed/login_with_phonenumber_screen.dart';
-import 'package:fgo/views/splash_screen.dart';
+import 'package:fgo/views/home/home_screen.dart';
+import 'package:fgo/views/selectlogin/select_login_screen.dart';
+import 'package:fgo/views/loginwithphonenumber/login_with_phonenumber_screen.dart';
+import 'package:fgo/views/splash/splash_screen.dart';
 import 'package:get/get.dart';
-
-import '../views/home_screen.dart';
 
 class RoutesClass {
   static String home = "/";
@@ -16,8 +15,8 @@ class RoutesClass {
     GetPage(
         name: home,
         page: () => const MyHomePage(),
-        transition: Transition.fadeIn,
-        transitionDuration: const Duration(milliseconds: 700)),
+        transition: Transition.rightToLeft,
+        transitionDuration: const Duration(milliseconds: 300)),
     GetPage(
         name: login,
         page: () => const Login(),
@@ -27,6 +26,6 @@ class RoutesClass {
         name: loginWithPhoneNumber,
         page: () => const LoginWithPhoneNumber(),
         transition: Transition.rightToLeft,
-        transitionDuration: const Duration(milliseconds: 250)),
+        transitionDuration: const Duration(milliseconds: 300)),
   ];
 }
