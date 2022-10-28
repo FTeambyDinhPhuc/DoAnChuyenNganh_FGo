@@ -1,6 +1,6 @@
 import 'package:fgo/constants.dart';
 import 'package:fgo/models/order_model.dart';
-import 'package:fgo/widgets/button_icon_small.dart';
+import 'package:fgo/widgets/hero_dialog_route.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
@@ -13,7 +13,9 @@ class Ticket extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Get.to(_TicketPopup(order: order));
+        Navigator.of(context).push(HeroDialogRoute(builder: (context) {
+          return _TicketPopup(order: order);
+        }));
       },
       child: Hero(
           tag: order.idOrder,
@@ -113,57 +115,78 @@ class _TicketPopup extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Hero(
-      tag: order.idOrder,
-      child: Container(
-        padding:
-            EdgeInsets.only(top: defaultPadding * 3, right: defaultPaddingIcon),
-        decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(defaultCircular)),
-        child: Column(
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                ButtonIconSmall(
-                  icon: Icons.arrow_back_ios,
-                  press: () {
-                    Get.back();
-                  },
-                ),
-                Text(
-                  "Chi tiết chuyến đi",
-                  style: Theme.of(context).textTheme.headline2,
-                ),
-              ],
+    return Center(
+      child: Padding(
+        padding: const EdgeInsets.all(defaultPadding),
+        child: Hero(
+          tag: order.idOrder,
+          child: Container(
+            constraints: BoxConstraints(maxHeight: Get.height / 1.5),
+            padding: EdgeInsets.all(defaultPadding),
+            decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(defaultCircular)),
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  Text(
+                    "Chi tiết chuyến đi",
+                    style: Theme.of(context).textTheme.headline2,
+                  ),
+                  const SizedBox(height: defaultPadding),
+                  Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        Container(
+                          child: _InfoBase(order: order),
+                          margin: EdgeInsets.only(bottom: defaultPadding),
+                          padding: EdgeInsets.all(defaultPadding),
+                          decoration: BoxDecoration(
+                              color: Colors.teal.withOpacity(0.5),
+                              borderRadius:
+                                  BorderRadius.circular(defaultCircular)),
+                        ),
+                        _InfoOrder(
+                          titleInfo: 'Hãng xe',
+                          describe: 'toyota vios',
+                        ),
+                        _InfoOrder(
+                          titleInfo: 'Hãng xe',
+                          describe: 'toyota vios',
+                        ),
+                        _InfoOrder(
+                          titleInfo: 'Hãng xe',
+                          describe: 'toyota vios',
+                        ),
+                        _InfoOrder(
+                          titleInfo: 'Hãng xe',
+                          describe: 'toyota vios',
+                        ),
+                        _InfoOrder(
+                          titleInfo: 'Hãng xe',
+                          describe: 'toyota vios',
+                        ),
+                        _InfoOrder(
+                          titleInfo: 'Hãng xe',
+                          describe: 'toyota vios',
+                        ),
+                        _InfoOrder(
+                          titleInfo: 'Hãng xe',
+                          describe: 'toyota vios',
+                        ),
+                        _InfoOrder(
+                          titleInfo: 'Hãng xe',
+                          describe: 'toyota vios',
+                        ),
+                        _InfoOrder(
+                          titleInfo: 'Hãng xe',
+                          describe: 'toyota vios',
+                        ),
+                      ]),
+                ],
+              ),
             ),
-            Padding(
-              padding: const EdgeInsets.all(defaultPadding),
-              child: Column(children: [
-                Container(
-                  child: _InfoBase(order: order),
-                  margin: EdgeInsets.only(bottom: defaultPadding),
-                  padding: EdgeInsets.all(defaultPadding),
-                  decoration: BoxDecoration(
-                      color: Colors.teal.withOpacity(0.5),
-                      borderRadius: BorderRadius.circular(defaultCircular)),
-                ),
-                _InfoOrder(
-                  titleInfo: 'Hãng xe',
-                  describe: 'toyota vios',
-                ),
-                _InfoOrder(
-                  titleInfo: 'Hãng xe',
-                  describe: 'toyota vios',
-                ),
-                _InfoOrder(
-                  titleInfo: 'Hãng xe',
-                  describe: 'toyota vios',
-                ),
-              ]),
-            ),
-          ],
+          ),
         ),
       ),
     );

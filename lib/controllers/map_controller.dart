@@ -17,7 +17,6 @@ class MapController extends GetxController {
 
   void getCurrentLocation() async {
     Location location = Location();
-
     location.getLocation().then(
       (location) {
         latiTude.value = location.latitude!;

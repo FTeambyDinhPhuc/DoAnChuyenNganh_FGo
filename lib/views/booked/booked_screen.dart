@@ -1,6 +1,6 @@
 import 'package:fgo/models/order_model.dart';
 import 'package:fgo/views/booked/components/add_order_button.dart';
-import 'package:fgo/widgets/ticket.dart';
+import 'package:fgo/views/booked/components/list_order.dart';
 import 'package:flutter/material.dart';
 
 class BookedScreen extends StatelessWidget {
@@ -25,11 +25,9 @@ class BookedScreen extends StatelessWidget {
       ),
       body: Stack(
         children: [
-          ListView.builder(
-              itemCount: 13,
-              itemBuilder: (BuildContext context, int index) {
-                return Ticket(order: dataTest);
-              }),
+          ListOrder(
+            order: dataTest,
+          ),
           AddOrderButton(),
         ],
       ),

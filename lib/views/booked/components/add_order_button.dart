@@ -1,5 +1,4 @@
 import 'package:fgo/constants.dart';
-import 'package:fgo/widgets/button_icon_small.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -16,18 +15,15 @@ class AddOrderButton extends StatelessWidget {
           onTap: () {
             Get.to(_AddOrderPopup());
           },
-          child: Hero(
-            tag: 'addOrder',
-            child: Container(
-              padding: const EdgeInsets.all(defaultPadding),
-              decoration: BoxDecoration(
-                color: Theme.of(context).primaryColor,
-                shape: BoxShape.circle,
-              ),
-              child: Icon(
-                Icons.add_rounded,
-                size: defaultSizeIconButton,
-              ),
+          child: Container(
+            padding: const EdgeInsets.all(defaultPadding),
+            decoration: BoxDecoration(
+              color: Theme.of(context).primaryColor,
+              shape: BoxShape.circle,
+            ),
+            child: Icon(
+              Icons.add_rounded,
+              size: defaultSizeIconButton,
             ),
           ),
         ),
@@ -39,31 +35,32 @@ class AddOrderButton extends StatelessWidget {
 class _AddOrderPopup extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Hero(
-      tag: 'addOrder',
-      child: Container(
-        padding:
-            EdgeInsets.only(top: defaultPadding * 3, right: defaultPaddingIcon),
-        decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(defaultCircular)),
+    return Scaffold(
+      appBar: AppBar(
+        leading: IconButton(
+          icon: Icon(
+            Icons.arrow_back_ios,
+            color: Colors.black,
+          ),
+          onPressed: (() {
+            Get.back();
+          }),
+        ),
+        backgroundColor: Colors.white,
+        automaticallyImplyLeading: false,
+        actions: [
+          Center(
+            child: Text(
+              'Đặt xe',
+              style: Theme.of(context).textTheme.headline2,
+            ),
+          ),
+          const SizedBox(width: defaultPadding),
+        ],
+      ),
+      body: SafeArea(
         child: Column(
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                ButtonIconSmall(
-                  icon: Icons.arrow_back_ios,
-                  press: () {
-                    Get.back();
-                  },
-                ),
-                Text(
-                  "Đặt xe",
-                  style: Theme.of(context).textTheme.headline2,
-                ),
-              ],
-            ),
             Padding(
               padding: const EdgeInsets.all(defaultPadding),
               child: Column(children: []),
