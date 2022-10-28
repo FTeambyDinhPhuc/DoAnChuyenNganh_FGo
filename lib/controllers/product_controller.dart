@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:fgo/models/product_model.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
@@ -20,7 +19,7 @@ class ProductController extends GetxController {
     // ignore: unrelated_type_equality_checks
     if (response.statusCode == 200) {
       final data = jsonDecode(response.body);
-   
+
       for (var item in data) {
         productList.add(Product.fromJson(item));
 

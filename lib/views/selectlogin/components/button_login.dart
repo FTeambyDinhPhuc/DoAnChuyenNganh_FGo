@@ -25,6 +25,7 @@ class ButtonLogin extends StatelessWidget {
               Icon(
                 FontAwesomeIcons.facebook,
                 color: Colors.white,
+                size: defaultSizeIconButton,
               ),
               Text(
                 "Đăng nhập bằng Facebook",
@@ -49,6 +50,7 @@ class ButtonLogin extends StatelessWidget {
               Icon(
                 FontAwesomeIcons.google,
                 color: Colors.white,
+                size: defaultSizeIconButton,
               ),
               Text(
                 "Đăng nhập bằng Google",

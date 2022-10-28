@@ -19,12 +19,13 @@ class ButtonIconSmall extends StatelessWidget {
     return GestureDetector(
       onTap: press as void Function(),
       child: Container(
-        padding: const EdgeInsets.all(20),
+        padding: const EdgeInsets.all(defaultPaddingIcon),
         decoration: BoxDecoration(
           color: colorBackground,
           borderRadius: BorderRadius.circular(defaultCircular),
         ),
         child: Icon(
+          size: defaultSizeIconButton,
           icon,
           color: colorIcon,
         ),

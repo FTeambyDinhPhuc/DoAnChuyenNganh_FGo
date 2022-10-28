@@ -22,7 +22,7 @@ class FgoTheme {
           fontSize: 24,
         ),
         headline3: TextStyle(
-          color: Color(0xFF1B070B),
+          color: Colors.white.withOpacity(0.9),
           fontWeight: FontWeight.bold,
           fontSize: 18,
         ),

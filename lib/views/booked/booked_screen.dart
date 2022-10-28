@@ -1,3 +1,6 @@
+import 'package:fgo/models/order_model.dart';
+import 'package:fgo/views/booked/components/add_order_button.dart';
+import 'package:fgo/widgets/ticket.dart';
 import 'package:flutter/material.dart';
 
 class BookedScreen extends StatelessWidget {
@@ -5,8 +8,31 @@ class BookedScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Order dataTest = Order(
+        idOrder: 1,
+        scoresStart: 5.0,
+        nameDriver: 'Nguyễn Khuyết Danh',
+        imageDriver: 'assets/images/image_splash.png',
+        status: 'Đang chạy');
     return Scaffold(
-      body: Text("Booked Screen"),
+      appBar: AppBar(
+        title: Center(
+          child: Text(
+            'Lịch đặt xe',
+            style: Theme.of(context).textTheme.headline3,
+          ),
+        ),
+      ),
+      body: Stack(
+        children: [
+          ListView.builder(
+              itemCount: 13,
+              itemBuilder: (BuildContext context, int index) {
+                return Ticket(order: dataTest);
+              }),
+          AddOrderButton(),
+        ],
+      ),
     );
   }
 }
