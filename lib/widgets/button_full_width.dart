@@ -4,7 +4,9 @@ import 'package:flutter/material.dart';
 class ButtonFullWidth extends StatelessWidget {
   final String text;
   final Function press;
-  const ButtonFullWidth({Key? key, required this.text, required this.press})
+  Color? color;
+  ButtonFullWidth(
+      {Key? key, required this.text, required this.press, this.color})
       : super(key: key);
 
   @override
@@ -12,7 +14,7 @@ class ButtonFullWidth extends StatelessWidget {
     return MaterialButton(
       minWidth: double.infinity,
       height: heightButton,
-      color: Theme.of(context).primaryColor,
+      color: color == null ? Theme.of(context).primaryColor : color,
       child: Text(
         "$text",
         style: Theme.of(context).textTheme.button,

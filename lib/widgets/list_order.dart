@@ -1,21 +1,22 @@
-import 'package:fgo/models/order_model.dart';
+import 'package:fgo/controllers/order_controller.dart';
 import 'package:fgo/widgets/ticket.dart';
 import 'package:flutter/material.dart';
 
 class ListOrder extends StatelessWidget {
   const ListOrder({
     Key? key,
-    required this.order,
-  }) : super(key: key);
+    required OrderController controller,
+  })  : _controller = controller,
+        super(key: key);
 
-  final Order order;
+  final OrderController _controller;
 
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-        itemCount: 13,
+        itemCount: _controller.orderList.length,
         itemBuilder: (BuildContext context, int index) {
-          return Ticket(order: order);
+          return Ticket(order: _controller.orderList[index]);
         });
   }
 }

@@ -1,19 +1,27 @@
-import 'package:fgo/models/order_model.dart';
-import 'package:fgo/views/booked/components/add_order_button.dart';
-import 'package:fgo/views/booked/components/list_order.dart';
-import 'package:flutter/material.dart';
+import 'package:fgo/controllers/order_controller.dart';
 
-class BookedScreen extends StatelessWidget {
+import 'package:fgo/views/booked/components/add_order_button.dart';
+import 'package:fgo/widgets/list_order.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
+class BookedScreen extends StatefulWidget {
   const BookedScreen({super.key});
 
   @override
+  State<BookedScreen> createState() => _BookedScreenState();
+}
+
+class _BookedScreenState extends State<BookedScreen> {
+  var _controller = Get.put(OrderController());
+  @override
+  void initState() {
+    super.initState();
+    _controller.getBookedOrder();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    Order dataTest = Order(
-        idOrder: 1,
-        scoresStart: 5.0,
-        nameDriver: 'Nguyễn Khuyết Danh',
-        imageDriver: 'assets/images/image_splash.png',
-        status: 'Đang chạy');
     return Scaffold(
       appBar: AppBar(
         title: Center(
@@ -26,7 +34,7 @@ class BookedScreen extends StatelessWidget {
       body: Stack(
         children: [
           ListOrder(
-            order: dataTest,
+            controller: _controller,
           ),
           AddOrderButton(),
         ],

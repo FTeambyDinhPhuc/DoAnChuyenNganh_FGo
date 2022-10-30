@@ -2,7 +2,6 @@ import 'package:fgo/views/account/account_screen.dart';
 import 'package:fgo/views/booked/booked_screen.dart';
 import 'package:fgo/views/history/history_screen.dart';
 import 'package:fgo/views/now/now_screen.dart';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

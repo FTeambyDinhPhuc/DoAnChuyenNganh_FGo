@@ -10,3 +10,11 @@ const double defaultSizeText = 16.0;
 const double defaultSizeIcon = 16.0;
 const double defaultSizeIconButton = 24.0;
 const double heightButton = 55.0;
+const double defaultthickness = 2.0;
+
+//text
+
+const String statusBooked = 'Đã đặt';
+const String statusStarting = 'Đang chạy';
+const String statusCompleted = 'Hoàn thành';
+const String statusCancelled = 'Đã hủy';

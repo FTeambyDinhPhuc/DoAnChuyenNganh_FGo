@@ -1,5 +1,6 @@
 import 'package:fgo/constants.dart';
 import 'package:fgo/models/order_model.dart';
+import 'package:fgo/widgets/button_full_width.dart';
 import 'package:fgo/widgets/hero_dialog_route.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -24,7 +25,13 @@ class Ticket extends StatelessWidget {
             margin: EdgeInsets.all(defaultPadding),
             padding: EdgeInsets.all(defaultPadding),
             decoration: BoxDecoration(
-              color: Colors.teal.shade50,
+              color: order.status == statusStarting
+                  ? Colors.teal.shade300
+                  : order.status == statusCompleted
+                      ? Colors.blue.shade300
+                      : order.status == statusBooked
+                          ? Colors.blueGrey.shade300
+                          : Colors.red.shade300,
               borderRadius: BorderRadius.circular(defaultCircular),
               boxShadow: [
                 BoxShadow(
@@ -85,13 +92,17 @@ class _InfoBase extends StatelessWidget {
                 ),
                 const SizedBox(width: defaultPadding * 0.5),
                 Text(
-                  "${order.scoresStart}",
-                  style: Theme.of(context).textTheme.bodyText1,
+                  order.scoresStart.toString(),
+                  style: Theme.of(context).textTheme.headline6,
                 ),
                 const SizedBox(width: defaultPadding),
                 Text(
-                  "Mã đơn: ${order.idOrder}",
+                  "Mã đơn: ",
                   style: Theme.of(context).textTheme.bodyText1,
+                ),
+                Text(
+                  order.idOrder.toString(),
+                  style: Theme.of(context).textTheme.headline6,
                 ),
               ],
             ),
@@ -142,7 +153,13 @@ class _TicketPopup extends StatelessWidget {
                           margin: EdgeInsets.only(bottom: defaultPadding),
                           padding: EdgeInsets.all(defaultPadding),
                           decoration: BoxDecoration(
-                              color: Colors.teal.withOpacity(0.5),
+                              color: order.status == statusStarting
+                                  ? Colors.teal.shade300
+                                  : order.status == statusCompleted
+                                      ? Colors.blue.shade300
+                                      : order.status == statusBooked
+                                          ? Colors.blueGrey.shade300
+                                          : Colors.red.shade300,
                               borderRadius:
                                   BorderRadius.circular(defaultCircular)),
                         ),
@@ -182,6 +199,12 @@ class _TicketPopup extends StatelessWidget {
                           titleInfo: 'Hãng xe',
                           describe: 'toyota vios',
                         ),
+                        order.status != statusBooked
+                            ? Container()
+                            : ButtonFullWidth(
+                                text: 'Hủy chuyến',
+                                color: Colors.red,
+                                press: () {})
                       ]),
                 ],
               ),
@@ -217,7 +240,7 @@ class _InfoOrder extends StatelessWidget {
           style: Theme.of(context).textTheme.headline5,
         ),
         const Divider(
-          thickness: 2,
+          thickness: defaultthickness,
         ),
         const SizedBox(height: defaultPadding),
       ],
