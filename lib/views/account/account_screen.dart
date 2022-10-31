@@ -6,7 +6,15 @@ class AccountScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Text("Account Screen"),
+      appBar: AppBar(
+        title: Center(
+          child: Text(
+            'Thông tin tài khoản',
+            style: Theme.of(context).textTheme.headline3,
+          ),
+        ),
+      ),
+      body: Container(),
     );
   }
 }

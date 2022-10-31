@@ -25,40 +25,54 @@ class _NowScreenState extends State<NowScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-          title: Center(
-        child: Text(
-          '${_controllerLocation.statusMove.value}',
-          style: Theme.of(context).textTheme.headline3,
-        ),
-      )),
-      body: Stack(alignment: Alignment.bottomCenter, children: [
-        Expanded(child: Obx(
-          () {
-            if (_controllerLocation.added.value) {
-              _controllerLocation.updateCameraMap();
-            }
-            return GoogleMap(
-              initialCameraPosition: CameraPosition(
-                  target: LatLng(_controllerLocation.latiTude.value,
-                      _controllerLocation.longiTude.value),
-                  zoom: 16),
-              markers: {
-                Marker(
-                    markerId: MarkerId("currentLocation"),
-                    position: LatLng(_controllerLocation.latiTude.value,
-                        _controllerLocation.longiTude.value)),
-              },
-              onMapCreated: (mapController) {
-                _controllerLocation.googleController.complete(mapController);
-                _controllerLocation.added.value = true;
-              },
-            );
-          },
-        )),
-        Ticket(order: _controllerOrder.orderList[0])
-      ]),
-    );
+    return _controllerOrder.orderList == null
+        ? Center(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Image.asset('assets/images/bongocat.gif'),
+                Text(
+                  'Hôm nay bạn không có lịch!',
+                  style: Theme.of(context).textTheme.headline2,
+                ),
+              ],
+            ),
+          )
+        : Scaffold(
+            appBar: AppBar(
+                title: Center(
+              child: Text(
+                '${_controllerLocation.statusMove.value}',
+                style: Theme.of(context).textTheme.headline3,
+              ),
+            )),
+            body: Stack(alignment: Alignment.bottomCenter, children: [
+              Expanded(child: Obx(
+                () {
+                  if (_controllerLocation.added.value) {
+                    _controllerLocation.updateCameraMap();
+                  }
+                  return GoogleMap(
+                    initialCameraPosition: CameraPosition(
+                        target: LatLng(_controllerLocation.latiTude.value,
+                            _controllerLocation.longiTude.value),
+                        zoom: 16),
+                    markers: {
+                      Marker(
+                          markerId: MarkerId("currentLocation"),
+                          position: LatLng(_controllerLocation.latiTude.value,
+                              _controllerLocation.longiTude.value)),
+                    },
+                    onMapCreated: (mapController) {
+                      _controllerLocation.googleController
+                          .complete(mapController);
+                      _controllerLocation.added.value = true;
+                    },
+                  );
+                },
+              )),
+              Ticket(order: _controllerOrder.orderList[0])
+            ]),
+          );
   }
 }

@@ -1,9 +1,13 @@
 import 'package:fgo/constants.dart';
 import 'package:fgo/models/order_model.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
 class OrderController extends GetxController {
   var orderList = <Order>[].obs;
+  late TextEditingController bookingDateController;
+  late TextEditingController bookingTimeController;
 
   void getAllOrder() {
     orderList.value = [
@@ -83,5 +87,27 @@ class OrderController extends GetxController {
           imageDriver: 'assets/images/image_splash.png',
           status: statusCancelled),
     ];
+  }
+
+  void getBookingDate(BuildContext context) async {
+    DateTime? pickedData = await showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(2000),
+      lastDate: DateTime(2101),
+    );
+    if (pickedData != null) {
+      String formatteDate = DateFormat("dd-MM-yyyy").format(pickedData);
+      bookingDateController.text = formatteDate;
+    }
+  }
+
+  void getBookingTime(BuildContext context) async {
+    TimeOfDay? pickedData =
+        await showTimePicker(context: context, initialTime: TimeOfDay.now());
+    if (pickedData != null) {
+      bookingTimeController.text =
+          '${pickedData.hour.toString()} : ${pickedData.minute.toString()}';
+    }
   }
 }
