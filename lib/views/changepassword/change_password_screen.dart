@@ -14,23 +14,26 @@ class ChangePassword extends StatelessWidget {
       body: SafeArea(
           child: Padding(
         padding: const EdgeInsets.only(left: 19, top: 0, right: 19, bottom: 0),
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              TextFiledChangePassword(),
-              ButtonFullWidth(
-                  text: "Xác nhận",
-                  press: () {
-                    Get.back();
-                  }),
-              const SizedBox(height: defaultPadding),
-              ButtonFullWidth(
-                  text: "Hủy",
-                  color: Colors.red.shade300,
-                  press: () {
-                    Get.back();
-                  }),
-            ],
+        child: Center(
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                TextFiledChangePassword(),
+                ButtonFullWidth(
+                    text: "Xác nhận",
+                    press: () {
+                      Get.back();
+                    }),
+                const SizedBox(height: defaultPadding),
+                ButtonFullWidth(
+                    text: "Hủy",
+                    color: Colors.red.shade300,
+                    press: () {
+                      Get.back();
+                    }),
+              ],
+            ),
           ),
         ),
       )),

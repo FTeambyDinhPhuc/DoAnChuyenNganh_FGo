@@ -11,49 +11,46 @@ class TextFieldRegister extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Text(
-            "Đăng ký",
-            style: Theme.of(context).textTheme.headline1,
+    return Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
+      Text(
+        "Đăng ký",
+        style: Theme.of(context).textTheme.headline1,
+      ),
+      Padding(
+        padding: const EdgeInsets.only(
+            top: defaultPadding * 2.5, bottom: defaultPadding * 1.5),
+        child: Column(children: [
+          TextFieldWithIcon(
+            text: "Số điện thoại",
+            icon: FontAwesomeIcons.phone,
+            inputType: TextInputType.phone,
           ),
-          Padding(
-            padding: const EdgeInsets.only(
-                top: defaultPadding * 2.5, bottom: defaultPadding * 1.5),
-            child: Column(children: [
-              TextFieldWithIcon(
-                text: "Số điện thoại",
-                icon: FontAwesomeIcons.phone,
-                inputType: TextInputType.phone,
-              ),
-              const SizedBox(height: defaultPadding),
-              TextFieldWithIcon(
-                text: "Tên hiển thị",
-                icon: FontAwesomeIcons.userTie,
-                inputType: TextInputType.name,
-              ),
-              const SizedBox(height: defaultPadding),
-              TextFieldWithIcon(
-                text: "Căn cước công dân",
-                icon: FontAwesomeIcons.idCard,
-                inputType: TextInputType.number,
-              ),
-              const SizedBox(height: defaultPadding),
-              PassTextFieldWithIcon(
-                text: "Mật khẩu",
-                icon: FontAwesomeIcons.lock,
-                inputType: TextInputType.visiblePassword,
-              ),
-              const SizedBox(height: defaultPadding),
-              TextFieldWithIcon(
-                text: "Xác nhận mật khẩu",
-                icon: FontAwesomeIcons.lock,
-                inputType: TextInputType.text,
-              ),
-            ]),
+          const SizedBox(height: defaultPadding),
+          TextFieldWithIcon(
+            text: "Tên hiển thị",
+            icon: FontAwesomeIcons.userTie,
+            inputType: TextInputType.name,
           ),
-        ]);
+          const SizedBox(height: defaultPadding),
+          TextFieldWithIcon(
+            text: "Căn cước công dân",
+            icon: FontAwesomeIcons.idCard,
+            inputType: TextInputType.number,
+          ),
+          const SizedBox(height: defaultPadding),
+          PassTextFieldWithIcon(
+            text: "Mật khẩu",
+            icon: FontAwesomeIcons.lock,
+            inputType: TextInputType.visiblePassword,
+          ),
+          const SizedBox(height: defaultPadding),
+          TextFieldWithIcon(
+            text: "Xác nhận mật khẩu",
+            icon: FontAwesomeIcons.lock,
+            inputType: TextInputType.text,
+          ),
+        ]),
+      ),
+    ]);
   }
 }
