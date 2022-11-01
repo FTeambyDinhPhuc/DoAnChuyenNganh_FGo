@@ -1,5 +1,5 @@
 import 'package:fgo/routes/routes.dart';
-import 'package:fgo/views/loginwithphonenumber/components/select_other.dart';
+import 'package:fgo/views/loginwithphonenumber/components/select_other_login_with_numberphone.dart';
 import 'package:fgo/views/loginwithphonenumber/components/text_field_login_with_phone_number.dart';
 import 'package:fgo/widgets/button_full_width.dart';
 import 'package:flutter/material.dart';
@@ -32,7 +32,7 @@ class LoginWithPhoneNumber extends StatelessWidget {
                               press: () {
                                 Get.offAllNamed(RoutesClass.home);
                               }),
-                          SelectOther()
+                          SelectOtherLoginWithNumberphone()
                         ]),
                   )
                 ],

@@ -1,7 +1,25 @@
+import 'package:fgo/constants.dart';
+import 'package:fgo/controllers/custommer_controller.dart';
+import 'package:fgo/views/account/components/action_button.dart';
+import 'package:fgo/views/account/components/avatar_top.dart';
+import 'package:fgo/views/account/components/info_account.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
-class AccountScreen extends StatelessWidget {
+class AccountScreen extends StatefulWidget {
   const AccountScreen({super.key});
+
+  @override
+  State<AccountScreen> createState() => _AccountScreenState();
+}
+
+class _AccountScreenState extends State<AccountScreen> {
+  var _custommerController = Get.put(CustommerController());
+  @override
+  void initState() {
+    _custommerController.getCustommer();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +32,21 @@ class AccountScreen extends StatelessWidget {
           ),
         ),
       ),
-      body: Container(),
+      body: Padding(
+        padding: const EdgeInsets.all(defaultPadding),
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              AvatarTop(custommerController: _custommerController),
+              const SizedBox(height: defaultPadding * 2),
+              InfoAccount(custommerController: _custommerController),
+              const SizedBox(height: defaultPadding * 2),
+              ActionButton()
+            ],
+          ),
+        ),
+      ),
     );
   }
 }

@@ -1,0 +1,39 @@
+import 'package:fgo/constants.dart';
+
+import 'package:fgo/views/changepassword/components/text_field_change_password.dart';
+
+import 'package:fgo/widgets/button_full_width.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
+class ChangePassword extends StatelessWidget {
+  const ChangePassword({super.key});
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: SafeArea(
+          child: Padding(
+        padding: const EdgeInsets.only(left: 19, top: 0, right: 19, bottom: 0),
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              TextFiledChangePassword(),
+              ButtonFullWidth(
+                  text: "Xác nhận",
+                  press: () {
+                    Get.back();
+                  }),
+              const SizedBox(height: defaultPadding),
+              ButtonFullWidth(
+                  text: "Hủy",
+                  color: Colors.red.shade300,
+                  press: () {
+                    Get.back();
+                  }),
+            ],
+          ),
+        ),
+      )),
+    );
+  }
+}

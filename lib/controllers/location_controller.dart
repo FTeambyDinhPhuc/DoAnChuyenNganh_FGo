@@ -34,8 +34,9 @@ class LocationController extends GetxController {
 
   void updateCameraMap() async {
     GoogleMapController googleMapController = await googleController.future;
-    googleMapController.animateCamera(CameraUpdate.newCameraPosition(
-        CameraPosition(
-            zoom: 16, target: LatLng(latiTude.value, longiTude.value))));
+    googleMapController.animateCamera(
+      CameraUpdate.newCameraPosition(CameraPosition(
+          zoom: 16, target: LatLng(latiTude.value, longiTude.value))),
+    );
   }
 }

@@ -1,5 +1,11 @@
 class CustommerModel {
-  String Name = '';
-  String Age = '';
-  CustommerModel({required this.Name, required this.Age});
+  int idCustommer;
+  String avatar;
+  String Name;
+  String SDT;
+  CustommerModel(
+      {required this.idCustommer,
+      required this.Name,
+      required this.SDT,
+      required this.avatar});
 }
