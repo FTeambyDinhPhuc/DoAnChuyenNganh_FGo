@@ -18,8 +18,8 @@ class AddOrderScreen extends StatefulWidget {
 }
 
 class _AddOrderScreenState extends State<AddOrderScreen> {
-  var _placeController = Get.put(PlaceSearchController());
-  var _orderController = Get.put(OrderController());
+  var _placeController = Get.find<PlaceSearchController>();
+  var _orderController = Get.find<OrderController>();
 
   var dataSelected = 0.obs;
 
@@ -27,6 +27,8 @@ class _AddOrderScreenState extends State<AddOrderScreen> {
   void initState() {
     _orderController.bookingDateController = TextEditingController();
     _orderController.bookingTimeController = TextEditingController();
+    _placeController.startingAddressController = TextEditingController();
+    _placeController.endAddressController = TextEditingController();
     super.initState();
   }
 
@@ -62,13 +64,13 @@ class _AddOrderScreenState extends State<AddOrderScreen> {
               Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
             Category(title: 'Địa điểm'),
             TextField(
+              controller: _placeController.startingAddressController,
               decoration: InputDecoration(
                 prefixIcon: Icon(Icons.add_circle_outline),
                 hintText: 'Điểm đón',
               ),
               onChanged: (Value) {
                 _placeController.getAutocomplete(Value);
-                _placeController.sourceLocation.value = Value;
               },
             ),
             const SizedBox(height: defaultPadding / 2),
@@ -79,13 +81,13 @@ class _AddOrderScreenState extends State<AddOrderScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       TextField(
+                        controller: _placeController.endAddressController,
                         decoration: InputDecoration(
                           prefixIcon: Icon(Icons.add_location_outlined),
                           hintText: 'Điểm đến',
                         ),
                         onChanged: (Value) {
                           _placeController.getAutocomplete(Value);
-                          _placeController.destination.value = Value;
                         },
                       ),
                       const SizedBox(height: defaultPadding),
@@ -103,30 +105,42 @@ class _AddOrderScreenState extends State<AddOrderScreen> {
                                     top: defaultPadding * 3),
                                 child: ButtonFullWidth(
                                   text: 'Xác nhận',
-                                  press: () {},
+                                  press: () {
+                                    Get.back();
+                                    Get.snackbar(titleSnackbarOrder,
+                                        'Đặt chuyến đi thành công');
+                                  },
                                 ),
                               )
                             ],
                           ),
-                          if ( //_controller.searchResults != null &&
-                          // _controller.searchResults.length != 0 &&
-                          _placeController.destination.value != null &&
-                              _placeController.destination.value != '')
+                          if (_placeController.searchResults != null &&
+                              _placeController.searchResults.length != 0 &&
+                              _placeController.endAddressController.text !=
+                                  null &&
+                              _placeController.endAddressController.text !=
+                                  '' &&
+                              _placeController.endAddressController.text !=
+                                  _placeController.searchResults[0].description)
                             PlacesListBox(
-                              controller: _placeController,
-                              returnPlace: _placeController.destination.value,
+                              placeSearchcontroller: _placeController,
+                              textController:
+                                  _placeController.endAddressController,
                             ),
                         ],
                       )
                     ],
                   ),
-                  if ( //_controller.searchResults != null &&
-                  // _controller.searchResults.length != 0 &&
-                  _placeController.sourceLocation.value != null &&
-                      _placeController.sourceLocation.value != '')
+                  if (_placeController.searchResults != null &&
+                      _placeController.searchResults.length != 0 &&
+                      _placeController.startingAddressController.text != null &&
+                      _placeController.startingAddressController.text != '' &&
+                      _placeController.startingAddressController.text !=
+                          _placeController.searchResults[0].description)
                     PlacesListBox(
-                      controller: _placeController,
-                      returnPlace: _placeController.sourceLocation.value,
+                      placeSearchcontroller: _placeController,
+                      textController:
+                          _placeController.startingAddressController,
                     ),
                 ],
               ),

@@ -35,17 +35,17 @@ class OrderController extends GetxController {
           nameDriver: 'Tài xế 3',
           imageDriver: 'assets/images/image_splash.png',
           status: statusCancelled),
-    ];
-  }
-
-  void getBookedOrder() {
-    orderList.value = [
       Order(
           idOrder: 4,
           scoresStart: 5.0,
           nameDriver: 'Tài xế 4',
           imageDriver: 'assets/images/image_splash.png',
-          status: statusBooked),
+          status: statusWaitForConfirmation),
+    ];
+  }
+
+  void getBookedOrder() {
+    orderList.value = [
       Order(
           idOrder: 5,
           scoresStart: 5.0,
@@ -57,7 +57,7 @@ class OrderController extends GetxController {
           scoresStart: 5.0,
           nameDriver: 'Tài xế 6',
           imageDriver: 'assets/images/image_splash.png',
-          status: statusBooked),
+          status: statusWaitForConfirmation),
     ];
   }
 

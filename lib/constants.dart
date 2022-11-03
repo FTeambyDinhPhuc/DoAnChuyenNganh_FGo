@@ -1,4 +1,4 @@
-const String google_map_api_key = "AIzaSyDdtJr5cA-GGCN-ccpy11T5_yrUfdZsj0g";
+const String google_map_api_key = "AIzaSyANakIUEVw9sVm2k-aYRO6FFUz_BKyXVHQ";
 
 //size
 const double defaultPadding = 16.0;
@@ -14,8 +14,12 @@ const double heightButton = 55.0;
 const double defaultthickness = 2.0;
 
 //text
-
+// Trạng thái chuyến đi
+const String statusWaitForConfirmation = 'Chờ xác nhận';
 const String statusBooked = 'Đã đặt';
 const String statusStarting = 'Đang chạy';
 const String statusCompleted = 'Hoàn thành';
 const String statusCancelled = 'Đã hủy';
+//Title thông báo snackbar
+const String titleSnackbarAccount = 'Thông tin tài khoản';
+const String titleSnackbarOrder = 'Chuyến đi';

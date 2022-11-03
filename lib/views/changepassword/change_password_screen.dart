@@ -24,6 +24,8 @@ class ChangePassword extends StatelessWidget {
                     text: "Xác nhận",
                     press: () {
                       Get.back();
+                      Get.snackbar(
+                          titleSnackbarAccount, 'Đổi mật khẩu thành công');
                     }),
                 const SizedBox(height: defaultPadding),
                 ButtonFullWidth(

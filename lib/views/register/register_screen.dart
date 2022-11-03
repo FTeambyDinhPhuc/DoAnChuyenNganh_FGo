@@ -25,6 +25,7 @@ class Register extends StatelessWidget {
                     text: "Đăng ký",
                     press: () {
                       Get.offNamed(RoutesClass.loginWithPhoneNumber);
+                      Get.snackbar(titleSnackbarAccount, 'Đăng ký thành công ');
                     }),
                 const SizedBox(height: defaultPadding * 2),
                 SelectOtherRegister()

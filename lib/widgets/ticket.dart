@@ -25,13 +25,7 @@ class Ticket extends StatelessWidget {
             margin: EdgeInsets.all(defaultPadding),
             padding: EdgeInsets.all(defaultPadding),
             decoration: BoxDecoration(
-              color: order.status == statusStarting
-                  ? Colors.teal.shade300
-                  : order.status == statusCompleted
-                      ? Colors.blue.shade300
-                      : order.status == statusBooked
-                          ? Colors.blueGrey.shade300
-                          : Colors.red.shade300,
+              color: ColorTicket(order),
               borderRadius: BorderRadius.circular(defaultCircular),
               boxShadow: [
                 BoxShadow(
@@ -153,13 +147,7 @@ class _TicketPopup extends StatelessWidget {
                           margin: EdgeInsets.only(bottom: defaultPadding),
                           padding: EdgeInsets.all(defaultPadding),
                           decoration: BoxDecoration(
-                              color: order.status == statusStarting
-                                  ? Colors.teal.shade300
-                                  : order.status == statusCompleted
-                                      ? Colors.blue.shade300
-                                      : order.status == statusBooked
-                                          ? Colors.blueGrey.shade300
-                                          : Colors.red.shade300,
+                              color: ColorTicket(order),
                               borderRadius:
                                   BorderRadius.circular(defaultCircular)),
                         ),
@@ -187,24 +175,47 @@ class _TicketPopup extends StatelessWidget {
                           titleInfo: 'Hãng xe',
                           describe: 'toyota vios',
                         ),
-                        _InfoOrder(
-                          titleInfo: 'Hãng xe',
-                          describe: 'toyota vios',
-                        ),
-                        _InfoOrder(
-                          titleInfo: 'Hãng xe',
-                          describe: 'toyota vios',
-                        ),
-                        _InfoOrder(
-                          titleInfo: 'Hãng xe',
-                          describe: 'toyota vios',
-                        ),
-                        order.status != statusBooked
+                        order.status != statusBooked &&
+                                order.status != statusWaitForConfirmation
                             ? Container()
                             : ButtonFullWidth(
                                 text: 'Hủy chuyến',
                                 color: Colors.red,
-                                press: () {})
+                                press: () {
+                                  showDialog(
+                                    context: context,
+                                    builder: (context) => AlertDialog(
+                                      title: Text(
+                                        'Chuyến đi',
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .headline4,
+                                      ),
+                                      content: Text(
+                                        'Bạn chắc chắn muốn hủy chuyến không?',
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .headline6,
+                                      ),
+                                      actions: [
+                                        TextButton(
+                                            onPressed: () {
+                                              Get.back();
+                                            },
+                                            child: Text(
+                                              'Không',
+                                            )),
+                                        TextButton(
+                                            onPressed: () {},
+                                            child: Text(
+                                              'Hủy chuyến',
+                                              style:
+                                                  TextStyle(color: Colors.red),
+                                            )),
+                                      ],
+                                    ),
+                                  );
+                                })
                       ]),
                 ],
               ),
@@ -246,4 +257,17 @@ class _InfoOrder extends StatelessWidget {
       ],
     );
   }
+}
+
+Color ColorTicket(Order order) {
+  if (order.status == statusStarting)
+    return Colors.teal.shade300;
+  else if (order.status == statusCompleted)
+    return Colors.blue.shade300;
+  else if (order.status == statusBooked)
+    return Colors.lightGreen.shade300;
+  else if (order.status == statusWaitForConfirmation)
+    return Colors.blueGrey.shade300;
+
+  return Colors.red.shade300;
 }
