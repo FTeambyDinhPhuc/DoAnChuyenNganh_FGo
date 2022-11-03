@@ -19,12 +19,9 @@ class AvatarTop extends StatelessWidget {
       children: [
         Padding(
           padding: const EdgeInsets.all(defaultPadding),
-          child: Obx(
-            () => CircleAvatar(
-              backgroundImage:
-                  AssetImage(_custommerController.currentAvatar.value),
-              radius: defaultSizeImage,
-            ),
+          child: CircleAvatar(
+            // backgroundImage: AssetImage(_custommerController.custommer!.hinh),
+            radius: defaultSizeImage,
           ),
         ),
         GestureDetector(
