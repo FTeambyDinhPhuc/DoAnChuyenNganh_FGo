@@ -20,7 +20,7 @@ class AvatarTop extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.all(defaultPadding),
           child: CircleAvatar(
-            // backgroundImage: AssetImage(_custommerController.custommer!.hinh),
+            backgroundImage: AssetImage(_custommerController.custommer!.hinh),
             radius: defaultSizeImage,
           ),
         ),

@@ -15,12 +15,12 @@ class InfoAccount extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        // LineInfoAccount(
-        //     title: 'Tên khách hàng',
-        //     infoAccount: _custommerController.custommer.tenkhachhang),
-        // LineInfoAccount(
-        //     title: 'Số điện thoại',
-        //     infoAccount: _custommerController.custommer!.sodienthoai),
+        LineInfoAccount(
+            title: 'Tên khách hàng',
+            infoAccount: _custommerController.custommer!.tenkhachhang),
+        LineInfoAccount(
+            title: 'Số điện thoại',
+            infoAccount: _custommerController.custommer!.sodienthoai),
       ],
     );
   }

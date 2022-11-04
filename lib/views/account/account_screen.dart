@@ -16,42 +16,37 @@ class AccountScreen extends StatefulWidget {
 class _AccountScreenState extends State<AccountScreen> {
   var _custommerController = Get.put(CustommerController());
   @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
-    return _custommerController.isLoading.value
-        ? Center(
-            child: CircularProgressIndicator(
-                valueColor:
-                    AlwaysStoppedAnimation<Color>(Colors.blue.shade200)),
-          )
-        : Scaffold(
-            appBar: AppBar(
-              title: Center(
-                child: Obx(() => Text(
-                      'Thông tin tài khoản ${_custommerController.hienThiTen.value}',
-                      style: Theme.of(context).textTheme.headline3,
-                    )),
-              ),
-            ),
-            body: Padding(
+    return Scaffold(
+      appBar: AppBar(
+        title: Center(
+          child: Text(
+            'Thông tin tài khoản ',
+            style: Theme.of(context).textTheme.headline3,
+          ),
+        ),
+      ),
+      body: Obx(() => _custommerController.isLoading.value
+          ? Center(
+              child: CircularProgressIndicator(
+                  valueColor:
+                      AlwaysStoppedAnimation<Color>(Colors.blue.shade200)),
+            )
+          : Padding(
               padding: const EdgeInsets.all(defaultPadding),
               child: SingleChildScrollView(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    //AvatarTop(custommerController: _custommerController),
+                    AvatarTop(custommerController: _custommerController),
                     const SizedBox(height: defaultPadding * 2),
-                    //InfoAccount(custommerController: _custommerController),
+                    InfoAccount(custommerController: _custommerController),
                     const SizedBox(height: defaultPadding * 2),
                     ActionButton()
                   ],
                 ),
               ),
-            ),
-          );
+            )),
+    );
   }
 }

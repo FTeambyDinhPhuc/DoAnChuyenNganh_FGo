@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:fgo/models/custommer_model.dart';
-import 'package:fgo/services/customer_services.dart';
 
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
@@ -12,22 +11,29 @@ class CustommerController extends GetxController {
   RxString currentAvatar = ''.obs;
   var isLoading = true.obs;
 
+  CustommerModel? custommer;
+
   @override
-  void onInit() {
+  void onInit() async {
     super.onInit();
-    getCustommer();
+    await getCustommer(2);
   }
 
-  RxString hienThiTen = ''.obs;
-  // void getCustommer() {
-  //   print('hinh hien tai: ${custommer.avatar}');
-  //   currentAvatar.value = custommer.avatar;
-  // }
-
-  Future<void> getCustommer() async {
-    var custommer = await CustomerServices.getCustommer(idKhachHang);
-    hienThiTen.value = custommer!.tenkhachhang;
-    isLoading.value = false;
+  getCustommer(int id) async {
+    try {
+      var response =
+          await http.get(Uri.parse('https://cn-api.fteamlp.top/api/users/$id'));
+      if (response.statusCode == 200) {
+        var data = jsonDecode(response.body);
+        custommer = CustommerModel.fromJson(data['data']);
+        isLoading.value = false;
+      } else {
+        Get.snackbar('Error Loading data!',
+            'Server responded: ${response.statusCode}: ${response.reasonPhrase.toString()}');
+      }
+    } catch (e) {
+      print('error get data is: $e');
+    }
   }
 
   Future setImage() async {
