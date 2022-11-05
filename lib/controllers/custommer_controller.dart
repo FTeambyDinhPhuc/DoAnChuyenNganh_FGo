@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:fgo/models/custommer_model.dart';
+import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
@@ -12,6 +13,12 @@ class CustommerController extends GetxController {
   var isLoading = true.obs;
 
   CustommerModel? custommer;
+
+  late TextEditingController sodienthoaiController;
+  late TextEditingController tenhienthiController;
+  late TextEditingController cccdController;
+  late TextEditingController matkhauController;
+  late TextEditingController xacnhanmatkhauController;
 
   @override
   void onInit() async {

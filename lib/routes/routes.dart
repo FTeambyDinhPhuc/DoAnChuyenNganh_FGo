@@ -1,4 +1,5 @@
 import 'package:fgo/bindings/add_order_binding.dart';
+import 'package:fgo/bindings/register_binding.dart';
 import 'package:fgo/views/addorder/add_order_screen.dart';
 import 'package:fgo/views/changepassword/change_password_screen.dart';
 import 'package:fgo/views/home/home_screen.dart';
@@ -37,6 +38,7 @@ class RoutesClass {
     GetPage(
         name: register,
         page: () => Register(),
+        binding: RegisterBinding(),
         transition: Transition.rightToLeft,
         transitionDuration: const Duration(milliseconds: 300)),
     GetPage(
