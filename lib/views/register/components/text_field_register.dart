@@ -47,7 +47,7 @@ class TextFieldRegister extends StatelessWidget {
           TextFieldWithIcon(
             text: "Xác nhận mật khẩu",
             icon: FontAwesomeIcons.lock,
-            inputType: TextInputType.text,
+            inputType: TextInputType.visiblePassword,
           ),
         ]),
       ),
