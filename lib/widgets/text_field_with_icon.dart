@@ -5,16 +5,19 @@ class TextFieldWithIcon extends StatelessWidget {
   final String text;
   final IconData icon;
   final TextInputType inputType;
+  final TextEditingController? controller;
   const TextFieldWithIcon(
       {Key? key,
       required this.text,
       required this.icon,
+      this.controller,
       required this.inputType})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return TextField(
+      controller: controller,
       decoration: InputDecoration(
         prefixIcon: Icon(
           icon,

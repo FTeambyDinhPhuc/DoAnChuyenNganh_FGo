@@ -35,7 +35,7 @@ class TextFiledChangePassword extends StatelessWidget {
           TextFieldWithIcon(
             text: "Xác nhận mật khẩu mới",
             icon: FontAwesomeIcons.lock,
-            inputType: TextInputType.text,
+            inputType: TextInputType.visiblePassword,
           ),
         ]),
       ),
