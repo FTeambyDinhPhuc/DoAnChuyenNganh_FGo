@@ -1,4 +1,4 @@
-const String google_map_api_key = "AIzaSyANakIUEVw9sVm2k-aYRO6FFUz_BKyXVHQ";
+const String google_map_api_key = "AIzaSyBWwVFPQjMEPyCDcb9bacGlmrcF-8-uUK4";
 
 //size
 const double defaultPadding = 16.0;
