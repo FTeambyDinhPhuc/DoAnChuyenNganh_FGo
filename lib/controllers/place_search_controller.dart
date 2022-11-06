@@ -8,7 +8,8 @@ import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 
 class PlaceSearchController extends GetxController {
-  var searchResults = <PlaceSearch>[].obs;
+  var searchResultsStrarting = <PlaceSearch>[].obs;
+  var searchResultsEnd = <PlaceSearch>[].obs;
 
   late TextEditingController startingAddressController;
   late TextEditingController endAddressController;
@@ -19,8 +20,7 @@ class PlaceSearchController extends GetxController {
     var json = jsonDecode(response.body);
 
     var jsonResults = json['predictions'] as List;
-    return searchResults.value =
-        jsonResults.map((place) => PlaceSearch.fromJson(place)).toList();
+    return jsonResults.map((place) => PlaceSearch.fromJson(place)).toList();
   }
 
   Future<Place> getPlace(String placeId) async {
@@ -32,7 +32,8 @@ class PlaceSearchController extends GetxController {
     return Place.fromJson(jsonResult);
   }
 
-  setSelectedLocation(int index, TextEditingController textController) async {
+  setSelectedLocation(int index, TextEditingController textController,
+      List<PlaceSearch> searchResults) async {
     textController.text = searchResults[index].description;
     searchResults.clear();
   }

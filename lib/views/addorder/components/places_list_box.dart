@@ -1,31 +1,35 @@
 import 'package:fgo/constants.dart';
 import 'package:fgo/controllers/place_search_controller.dart';
+import 'package:fgo/models/place_search_model.dart';
 import 'package:flutter/material.dart';
 
 class PlacesListBox extends StatelessWidget {
-  const PlacesListBox(
+  PlacesListBox(
       {Key? key,
+      required this.searchResults,
       required this.placeSearchcontroller,
       required this.textController})
       : super(key: key);
 
   final PlaceSearchController placeSearchcontroller;
   final TextEditingController textController;
+  List<PlaceSearch> searchResults;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.only(top: defaultPadding / 2),
       child: ListView.builder(
-        itemCount: placeSearchcontroller.searchResults.length,
+        itemCount: searchResults.length,
         itemBuilder: (context, index) {
           return ListTile(
             title: Text(
-              placeSearchcontroller.searchResults[index].description,
+              searchResults[index].description,
               style: Theme.of(context).textTheme.headline6,
             ),
             onTap: () {
-              placeSearchcontroller.setSelectedLocation(index, textController);
+              placeSearchcontroller.setSelectedLocation(
+                  index, textController, searchResults);
             },
           );
         },
