@@ -105,6 +105,7 @@ class _InfoBase extends StatelessWidget {
         Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            Text('7/7/2022', style: Theme.of(context).textTheme.bodyText1),
             Text('Trạng thái', style: Theme.of(context).textTheme.bodyText1),
             Text(order.status, style: Theme.of(context).textTheme.headline5),
           ],

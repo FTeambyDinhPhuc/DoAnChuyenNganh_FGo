@@ -69,13 +69,13 @@ class _AddOrderScreenState extends State<AddOrderScreen> {
               decoration: InputDecoration(
                 prefixIcon: Icon(Icons.add_circle_outline),
                 hintText: 'Điểm đón',
+                suffixIcon: IconButton(
+                  icon: Icon(Icons.arrow_circle_right),
+                  onPressed: () {
+                    _placeController.searchStrartingPlaces();
+                  },
+                ),
               ),
-              onChanged: (Value) async {
-                if (Value.isNotEmpty) {
-                  _placeController.searchResultsStrarting.value =
-                      await _placeController.getAutocomplete(Value);
-                }
-              },
             ),
             const SizedBox(height: defaultPadding / 2),
             Obx(
@@ -88,15 +88,15 @@ class _AddOrderScreenState extends State<AddOrderScreen> {
                       TextField(
                         controller: _placeController.endAddressController,
                         decoration: InputDecoration(
-                          prefixIcon: Icon(Icons.add_location_outlined),
+                          prefixIcon: Icon(Icons.location_on_outlined),
+                          suffixIcon: IconButton(
+                            icon: Icon(Icons.arrow_circle_right),
+                            onPressed: () {
+                              _placeController.searchEndPlaces();
+                            },
+                          ),
                           hintText: 'Điểm đến',
                         ),
-                        onChanged: (Value) async {
-                          if (Value.isNotEmpty) {
-                            _placeController.searchResultsEnd.value =
-                                await _placeController.getAutocomplete(Value);
-                          }
-                        },
                       ),
                       const SizedBox(height: defaultPadding),
                       Stack(
@@ -107,12 +107,29 @@ class _AddOrderScreenState extends State<AddOrderScreen> {
                               const SizedBox(height: defaultPadding),
                               SelectCarPart(dataSelected: dataSelected),
                               const SizedBox(height: defaultPadding),
+                              ButtonFullWidth(
+                                color: Colors.blue.shade300,
+                                text: 'Xác nhận',
+                                press: () async {
+                                  print(
+                                      'id đâydasdas:  ${_placeController.idSourceLocation.value}');
+                                  print(
+                                      'id den đâydasdas:  ${_placeController.idDestinationLocation.value}');
+                                  await _placeController.setViTriDon();
+                                  await _placeController.setViTriDen();
+                                  await _placeController.getPolyPoints();
+                                  _placeController.tinhKm();
+                                },
+                              ),
+                              const Divider(
+                                thickness: defaultthickness,
+                              ),
                               EstimatePart(),
                               Padding(
                                 padding: const EdgeInsets.only(
                                     top: defaultPadding * 3),
                                 child: ButtonFullWidth(
-                                  text: 'Xác nhận',
+                                  text: 'Đặt xe',
                                   press: () {
                                     Get.back();
                                     Get.snackbar(titleSnackbarOrder,
@@ -123,35 +140,32 @@ class _AddOrderScreenState extends State<AddOrderScreen> {
                             ],
                           ),
                           //box hiển thị list của điểm đến
-                          if (_placeController.searchResultsEnd != null &&
-                              _placeController.searchResultsEnd.length != 0 &&
-                              _placeController.endAddressController.text !=
-                                  _placeController
-                                      .searchResultsEnd[0].description)
-                            PlacesListBox(
-                              searchResults:
-                                  _placeController.searchResultsEnd.value,
-                              placeSearchcontroller: _placeController,
-                              textController:
-                                  _placeController.endAddressController,
-                            ),
+                          _placeController.searchResultsEnd.length == 0
+                              ? Container()
+                              : PlacesListBox(
+                                  idLocation:
+                                      _placeController.idDestinationLocation,
+                                  searchResults:
+                                      _placeController.searchResultsEnd,
+                                  placeSearchcontroller: _placeController,
+                                  textController:
+                                      _placeController.endAddressController,
+                                ),
                         ],
                       )
                     ],
                   ),
                   //Box hiển thị list của điểm đón
-                  if (_placeController.searchResultsStrarting != null &&
-                      _placeController.searchResultsStrarting.length != 0 &&
-                      _placeController.startingAddressController.text !=
-                          _placeController
-                              .searchResultsStrarting[0].description)
-                    PlacesListBox(
-                      searchResults:
-                          _placeController.searchResultsStrarting.value,
-                      placeSearchcontroller: _placeController,
-                      textController:
-                          _placeController.startingAddressController,
-                    ),
+                  _placeController.searchResultsStrarting.length == 0
+                      ? Container()
+                      : PlacesListBox(
+                          idLocation: _placeController.idSourceLocation,
+                          searchResults:
+                              _placeController.searchResultsStrarting,
+                          placeSearchcontroller: _placeController,
+                          textController:
+                              _placeController.startingAddressController,
+                        ),
                 ],
               ),
             ),
