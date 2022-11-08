@@ -67,16 +67,10 @@ class _AddOrderScreenState extends State<AddOrderScreen> {
               decoration: InputDecoration(
                 prefixIcon: Icon(Icons.add_circle_outline),
                 hintText: 'Điểm đón',
-                suffixIcon: IconButton(
-                  icon: Icon(Icons.arrow_circle_right),
-                  onPressed: () {
-                    _placeController.searchStrartingPlaces();
-                  },
-                ),
               ),
-              onChanged: (value) async {
-                _placeController.searchResultsStrarting.value =
-                    await _placeController.getAutocomplete(value);
+              onChanged: (value) {
+                _placeController.getListPlaces(
+                    _placeController.searchResultsStrarting, value);
               },
             ),
             const SizedBox(height: defaultPadding / 2),
@@ -91,17 +85,11 @@ class _AddOrderScreenState extends State<AddOrderScreen> {
                         controller: _placeController.endAddressController,
                         decoration: InputDecoration(
                           prefixIcon: Icon(Icons.location_on_outlined),
-                          suffixIcon: IconButton(
-                            icon: Icon(Icons.arrow_circle_right),
-                            onPressed: () {
-                              _placeController.searchEndPlaces();
-                            },
-                          ),
                           hintText: 'Điểm đến',
                         ),
-                        onChanged: ((value) async {
-                          _placeController.searchResultsEnd.value =
-                              await _placeController.getAutocomplete(value);
+                        onChanged: ((value) {
+                          _placeController.getListPlaces(
+                              _placeController.searchResultsEnd, value);
                         }),
                       ),
                       const SizedBox(height: defaultPadding),
