@@ -52,6 +52,10 @@ class _NowScreenState extends State<NowScreen> {
                     _locationController.updateCameraMap();
                   }
                   return GoogleMap(
+                    myLocationEnabled: true,
+                    myLocationButtonEnabled: false,
+                    zoomGesturesEnabled: true,
+                    zoomControlsEnabled: false,
                     initialCameraPosition: CameraPosition(
                         target: LatLng(_locationController.driverLatiTude.value,
                             _locationController.driverLongiTude.value),

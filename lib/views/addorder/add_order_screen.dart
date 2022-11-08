@@ -21,8 +21,6 @@ class _AddOrderScreenState extends State<AddOrderScreen> {
   var _placeController = Get.find<PlaceSearchController>();
   var _orderController = Get.find<OrderController>();
 
-  var dataSelected = 0.obs;
-
   @override
   void initState() {
     _orderController.bookingDateController = TextEditingController();
@@ -76,6 +74,10 @@ class _AddOrderScreenState extends State<AddOrderScreen> {
                   },
                 ),
               ),
+              onChanged: (value) async {
+                _placeController.searchResultsStrarting.value =
+                    await _placeController.getAutocomplete(value);
+              },
             ),
             const SizedBox(height: defaultPadding / 2),
             Obx(
@@ -97,6 +99,10 @@ class _AddOrderScreenState extends State<AddOrderScreen> {
                           ),
                           hintText: 'Điểm đến',
                         ),
+                        onChanged: ((value) async {
+                          _placeController.searchResultsEnd.value =
+                              await _placeController.getAutocomplete(value);
+                        }),
                       ),
                       const SizedBox(height: defaultPadding),
                       Stack(
@@ -105,26 +111,66 @@ class _AddOrderScreenState extends State<AddOrderScreen> {
                             children: [
                               DateTimePart(orderController: _orderController),
                               const SizedBox(height: defaultPadding),
-                              SelectCarPart(dataSelected: dataSelected),
+                              SelectCarPart(
+                                  dataSelected:
+                                      _orderController.selectQuantity),
                               const SizedBox(height: defaultPadding),
                               ButtonFullWidth(
                                 color: Colors.blue.shade300,
                                 text: 'Xác nhận',
                                 press: () async {
-                                  print(
-                                      'id đâydasdas:  ${_placeController.idSourceLocation.value}');
-                                  print(
-                                      'id den đâydasdas:  ${_placeController.idDestinationLocation.value}');
-                                  await _placeController.setViTriDon();
-                                  await _placeController.setViTriDen();
-                                  await _placeController.getPolyPoints();
-                                  _placeController.tinhKm();
+                                  if (_placeController
+                                          .idSourceLocation.isNotEmpty &&
+                                      _placeController
+                                          .idDestinationLocation.isNotEmpty &&
+                                      _orderController.bookingDateController
+                                          .text.isNotEmpty &&
+                                      _orderController.bookingTimeController
+                                          .text.isNotEmpty &&
+                                      _orderController.selectQuantity != 0) {
+                                    await _placeController.setViTriDon();
+                                    await _placeController.setViTriDen();
+                                    await _placeController.getPolyPoints();
+                                    _placeController.tinhQuangDuong();
+                                    _orderController.tinhTien(
+                                        _placeController.distance.value);
+                                  } else {
+                                    showDialog(
+                                      context: context,
+                                      builder: (context) => AlertDialog(
+                                        title: Text(
+                                          'Bạn nhập thiếu thông tin!',
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .headline4,
+                                        ),
+                                        content: Text(
+                                          'Vui lòng nhập lại',
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .headline6,
+                                        ),
+                                        actions: [
+                                          TextButton(
+                                              onPressed: () {
+                                                Get.back();
+                                              },
+                                              child: Text(
+                                                'Đồng ý',
+                                              )),
+                                        ],
+                                      ),
+                                    );
+                                  }
                                 },
                               ),
                               const Divider(
                                 thickness: defaultthickness,
                               ),
-                              EstimatePart(),
+                              EstimatePart(
+                                placeSearchController: _placeController,
+                                orderController: _orderController,
+                              ),
                               Padding(
                                 padding: const EdgeInsets.only(
                                     top: defaultPadding * 3),

@@ -5,9 +5,18 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
 class OrderController extends GetxController {
+  //danh sách order
   var orderList = <Order>[].obs;
-  late TextEditingController bookingDateController;
-  late TextEditingController bookingTimeController;
+
+  //texteditcontroller của text fiel
+  late TextEditingController bookingDateController; //text fiel date
+  late TextEditingController bookingTimeController; //text fiel time
+
+  //Số chổ được chọn
+  var selectQuantity = 0.obs;
+
+  //Thành tiền
+  var totalMoney = 0.obs;
 
   void getAllOrder() {
     orderList.value = [
@@ -108,6 +117,32 @@ class OrderController extends GetxController {
     if (pickedData != null) {
       bookingTimeController.text =
           '${pickedData.hour.toString()} : ${pickedData.minute.toString()}';
+    }
+  }
+
+  void tinhTien(int distance) {
+    double nhienLieuTieuThu = 0.0; // xăng trên 1km
+    double tienXangTheoXe = 0.0;
+    double tienXang = 0.0;
+    int tienCong = 0;
+    double thanhTien = 0.0;
+
+    if (selectQuantity != 0) {
+      if (selectQuantity == 5) {
+        nhienLieuTieuThu = 0.06;
+      } else if (selectQuantity == 7) {
+        nhienLieuTieuThu = 0.08;
+      } else {
+        nhienLieuTieuThu = 0.1;
+      }
+
+      tienXangTheoXe = nhienLieuTieuThu * gasPrice;
+
+      tienXang = (distance * 2) * tienXangTheoXe;
+      tienCong = distance * wage;
+
+      thanhTien = tienXang + tienCong;
+      totalMoney.value = thanhTien.round();
     }
   }
 }

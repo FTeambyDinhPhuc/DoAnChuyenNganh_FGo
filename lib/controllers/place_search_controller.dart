@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:fgo/constants.dart';
 import 'package:fgo/models/place.dart';
 import 'package:fgo/models/place_search_model.dart';
@@ -11,18 +10,26 @@ import 'package:http/http.dart' as http;
 import 'dart:math' show cos, sqrt, asin;
 
 class PlaceSearchController extends GetxController {
-  var searchResultsStrarting = <PlaceSearch>[].obs;
-  var searchResultsEnd = <PlaceSearch>[].obs;
+  //danh sách địa chỉ gợi ý
+  var searchResultsStrarting = <PlaceSearch>[].obs; // danh sách của điểm đón
+  var searchResultsEnd = <PlaceSearch>[].obs; // danh sách của điểm đến
 
-  late TextEditingController startingAddressController;
-  late TextEditingController endAddressController;
+  //controller của textfiel
+  late TextEditingController startingAddressController; // textfiel điểm đón
+  late TextEditingController endAddressController; // textfiel điểm đến
 
-  var idSourceLocation = 'co cai cuc'.obs;
+  //id địa chỉ của google map
+  var idSourceLocation = ''.obs;
   var idDestinationLocation = ''.obs;
+
+  //Quãng đường ước tính
+  var distance = 0.obs;
 
   //vị trí đón
   var sourceLatiTude = 0.0;
   var sourceLongiTude = 0.0;
+  //Huyện của vị trí đón
+  var districtSource;
 
   //vị trí muốn đến
   var destinationLatiTude = 0.0;
@@ -51,15 +58,18 @@ class PlaceSearchController extends GetxController {
     return Place.fromJson(jsonResult);
   }
 
+  //lấy ra danh sách địa chỉ gợi ý của điểm đón
   searchEndPlaces() async {
     searchResultsEnd.value = await getAutocomplete(endAddressController.text);
   }
 
+  //lấy ra danh sách địa chỉ gợi ý của điểm đến
   searchStrartingPlaces() async {
     searchResultsStrarting.value =
         await getAutocomplete(startingAddressController.text);
   }
 
+  //chọn địa chỉ được gợi ý trả về id của địa chỉ đó
   setSelectedLocation(int index, TextEditingController textController,
       List<PlaceSearch> searchResults) {
     textController.text = searchResults[index].description;
@@ -73,6 +83,15 @@ class PlaceSearchController extends GetxController {
     Place place = await getPlace(idSourceLocation.value);
     sourceLatiTude = place.geometry.location.lat;
     sourceLongiTude = place.geometry.location.lng;
+    var listComponents = place.addressComponents;
+    for (int i = 0; i < listComponents.length; i++) {
+      var listTypes = listComponents[i].types;
+      for (int j = 0; j < listTypes.length; j++) {
+        if (listTypes[j].toString() == typeDistrict) {
+          districtSource = listComponents[i].longName;
+        }
+      }
+    }
   }
 
   //set vị trí đến
@@ -82,6 +101,7 @@ class PlaceSearchController extends GetxController {
     destinationLongtiTude = place.geometry.location.lng;
   }
 
+  //lấy các điểm từ trên đường từ vị trí source đến destination
   getPolyPoints() async {
     polylineCoordinates.clear();
     PolylinePoints polylinePoints = PolylinePoints();
@@ -96,6 +116,7 @@ class PlaceSearchController extends GetxController {
     }
   }
 
+  //cộng 2 vector trả về km
   double calculateDistance(lat1, lon1, lat2, lon2) {
     var p = 0.017453292519943295;
     var c = cos;
@@ -105,7 +126,8 @@ class PlaceSearchController extends GetxController {
     return 12742 * asin(sqrt(a));
   }
 
-  void tinhKm() {
+  //tính quảng đường từ list các điểm trên quảng đường từ source đến destination
+  void tinhQuangDuong() {
     double totalDistance = 0;
     for (var i = 0; i < polylineCoordinates.length - 1; i++) {
       totalDistance += calculateDistance(
@@ -114,6 +136,6 @@ class PlaceSearchController extends GetxController {
           polylineCoordinates[i + 1].latitude,
           polylineCoordinates[i + 1].longitude);
     }
-    print(totalDistance);
+    distance.value = totalDistance.round();
   }
 }

@@ -23,3 +23,9 @@ const String statusCancelled = 'Đã hủy';
 //Title thông báo snackbar
 const String titleSnackbarAccount = 'Thông tin tài khoản';
 const String titleSnackbarOrder = 'Chuyến đi';
+
+//Type trong address components API google map
+const String typeDistrict = 'administrative_area_level_2';
+//
+const int gasPrice = 23000;
+const int wage = 5000;
