@@ -1,46 +1,20 @@
-import 'dart:convert';
-
 import 'package:fgo/models/custommer_model.dart';
-import 'package:flutter/material.dart';
-
+import 'package:fgo/services/fgoapp_services.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:http/http.dart' as http;
 
 class CustommerController extends GetxController {
-  int idKhachHang = 2;
   RxString currentAvatar = ''.obs;
   var isLoading = true.obs;
-
   CustommerModel? custommer;
 
-  late TextEditingController sodienthoaiController;
-  late TextEditingController tenhienthiController;
-  late TextEditingController cccdController;
-  late TextEditingController matkhauController;
-  late TextEditingController xacnhanmatkhauController;
-
-  @override
-  void onInit() async {
-    super.onInit();
-    await getCustommer(2);
-  }
-
+  //Lấy thông tin tài khoản
   getCustommer(int id) async {
-    try {
-      var response =
-          await http.get(Uri.parse('https://cn-api.fteamlp.top/api/users/$id'));
-      if (response.statusCode == 200) {
-        var data = jsonDecode(response.body);
-        custommer = CustommerModel.fromJson(data['data']);
-        isLoading.value = false;
-      } else {
-        Get.snackbar('Error Loading data!',
-            'Server responded: ${response.statusCode}: ${response.reasonPhrase.toString()}');
-      }
-    } catch (e) {
-      print('error get data is: $e');
-    }
+    custommer = await FGoAppServices.fetchCustommer(id);
+    if (custommer != null) {
+      isLoading.value = false;
+    } else
+      print("Dữ liệu tài khoản chưa được đổ vào!");
   }
 
   Future setImage() async {

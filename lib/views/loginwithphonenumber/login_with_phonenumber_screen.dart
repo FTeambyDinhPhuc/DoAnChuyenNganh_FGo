@@ -1,12 +1,27 @@
-import 'package:fgo/routes/routes.dart';
+import 'package:fgo/controllers/login_controller.dart';
 import 'package:fgo/views/loginwithphonenumber/components/select_other_login_with_numberphone.dart';
 import 'package:fgo/views/loginwithphonenumber/components/text_field_login_with_phone_number.dart';
 import 'package:fgo/widgets/button_full_width.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class LoginWithPhoneNumber extends StatelessWidget {
+class LoginWithPhoneNumber extends StatefulWidget {
   const LoginWithPhoneNumber({super.key});
+
+  @override
+  State<LoginWithPhoneNumber> createState() => _LoginWithPhoneNumberState();
+}
+
+class _LoginWithPhoneNumberState extends State<LoginWithPhoneNumber> {
+  var _loginController = Get.find<LoginController>();
+
+  @override
+  void initState() {
+    _loginController.numberPhoneController = TextEditingController();
+    _loginController.passwordController = TextEditingController();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,7 +36,8 @@ class LoginWithPhoneNumber extends StatelessWidget {
               child: Column(
                 children: [
                   Expanded(
-                    child: TextFieldLoginWithPhoneNumber(),
+                    child: TextFieldLoginWithPhoneNumber(
+                        loginController: _loginController),
                   ),
                   Expanded(
                     child: Column(
@@ -30,7 +46,7 @@ class LoginWithPhoneNumber extends StatelessWidget {
                           ButtonFullWidth(
                               text: "Đăng nhập",
                               press: () {
-                                Get.offAllNamed(RoutesClass.home);
+                                _loginController.login();
                               }),
                           SelectOtherLoginWithNumberphone()
                         ]),

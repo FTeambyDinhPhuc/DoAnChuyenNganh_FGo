@@ -19,6 +19,9 @@ class InfoAccount extends StatelessWidget {
             title: 'Tên khách hàng',
             infoAccount: _custommerController.custommer!.tenkhachhang),
         LineInfoAccount(
+            title: 'Căn cước công dân',
+            infoAccount: _custommerController.custommer!.cccd),
+        LineInfoAccount(
             title: 'Số điện thoại',
             infoAccount: _custommerController.custommer!.sodienthoai),
       ],

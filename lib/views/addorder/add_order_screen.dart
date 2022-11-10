@@ -1,4 +1,5 @@
 import 'package:fgo/constants.dart';
+import 'package:fgo/controllers/home_controller.dart';
 import 'package:fgo/controllers/order_controller.dart';
 import 'package:fgo/controllers/place_search_controller.dart';
 import 'package:fgo/views/addorder/components/date_time_part.dart';
@@ -20,6 +21,7 @@ class AddOrderScreen extends StatefulWidget {
 class _AddOrderScreenState extends State<AddOrderScreen> {
   var _placeController = Get.find<PlaceSearchController>();
   var _orderController = Get.find<OrderController>();
+  var _homeController = Get.find<HomeController>();
 
   @override
   void initState() {
@@ -97,11 +99,13 @@ class _AddOrderScreenState extends State<AddOrderScreen> {
                         children: [
                           Column(
                             children: [
-                              DateTimePart(orderController: _orderController),
+                              DateTimePart(
+                                  orderController:
+                                      _orderController), // Chọn  ngày giờ
                               const SizedBox(height: defaultPadding),
                               SelectCarPart(
-                                  dataSelected:
-                                      _orderController.selectQuantity),
+                                  dataSelected: _orderController
+                                      .selectQuantity), // chọn loại xe
                               const SizedBox(height: defaultPadding),
                               ButtonFullWidth(
                                 color: Colors.blue.shade300,
@@ -165,9 +169,14 @@ class _AddOrderScreenState extends State<AddOrderScreen> {
                                 child: ButtonFullWidth(
                                   text: 'Đặt xe',
                                   press: () {
-                                    Get.back();
-                                    Get.snackbar(titleSnackbarOrder,
-                                        'Đặt chuyến đi thành công');
+                                    _orderController.AddOrder(
+                                        _homeController.idCustommer.value,
+                                        _placeController.idSourceLocation.value,
+                                        _placeController
+                                            .idDestinationLocation.value,
+                                        _placeController.districtSource,
+                                        _placeController.distance.value
+                                            .toString());
                                   },
                                 ),
                               )

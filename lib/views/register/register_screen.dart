@@ -1,5 +1,6 @@
 import 'package:fgo/constants.dart';
-import 'package:fgo/controllers/custommer_controller.dart';
+
+import 'package:fgo/controllers/register_controller.dart';
 import 'package:fgo/routes/routes.dart';
 import 'package:fgo/views/register/components/select_orther_register.dart';
 
@@ -16,15 +17,15 @@ class Register extends StatefulWidget {
 }
 
 class _RegisterState extends State<Register> {
-  var _custommerController = Get.find<CustommerController>();
+  var _registerController = Get.find<RegisterController>();
 
   @override
   void initState() {
-    _custommerController.sodienthoaiController = TextEditingController();
-    _custommerController.tenhienthiController = TextEditingController();
-    _custommerController.cccdController = TextEditingController();
-    _custommerController.matkhauController = TextEditingController();
-    _custommerController.xacnhanmatkhauController = TextEditingController();
+    _registerController.sodienthoaiController = TextEditingController();
+    _registerController.tenhienthiController = TextEditingController();
+    _registerController.cccdController = TextEditingController();
+    _registerController.matkhauController = TextEditingController();
+    _registerController.xacnhanmatkhauController = TextEditingController();
     super.initState();
   }
 
@@ -39,12 +40,11 @@ class _RegisterState extends State<Register> {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                TextFieldRegister(custommerController: _custommerController),
+                TextFieldRegister(registercontroller: _registerController),
                 ButtonFullWidth(
                     text: "Đăng ký",
                     press: () {
-                      Get.offNamed(RoutesClass.loginWithPhoneNumber);
-                      Get.snackbar(titleSnackbarAccount, 'Đăng ký thành công ');
+                      _registerController.register();
                     }),
                 const SizedBox(height: defaultPadding * 2),
                 SelectOtherRegister()

@@ -1,5 +1,6 @@
 import 'package:fgo/constants.dart';
 import 'package:fgo/controllers/custommer_controller.dart';
+import 'package:fgo/controllers/home_controller.dart';
 import 'package:fgo/views/account/components/action_button.dart';
 import 'package:fgo/views/account/components/avatar_top.dart';
 import 'package:fgo/views/account/components/info_account.dart';
@@ -15,6 +16,15 @@ class AccountScreen extends StatefulWidget {
 
 class _AccountScreenState extends State<AccountScreen> {
   var _custommerController = Get.put(CustommerController());
+  var _homeController = Get.find<HomeController>();
+
+  @override
+  void initState() {
+    _custommerController
+        .getCustommer(int.parse(_homeController.idCustommer.value));
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,7 +52,10 @@ class _AccountScreenState extends State<AccountScreen> {
                     const SizedBox(height: defaultPadding * 2),
                     InfoAccount(custommerController: _custommerController),
                     const SizedBox(height: defaultPadding * 2),
-                    ActionButton()
+                    ActionButton(
+                      custommerController: _custommerController,
+                      homeController: _homeController,
+                    )
                   ],
                 ),
               ),

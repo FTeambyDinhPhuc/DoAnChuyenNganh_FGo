@@ -1,7 +1,6 @@
 import 'package:fgo/constants.dart';
 import 'package:fgo/controllers/custommer_controller.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 class AvatarTop extends StatelessWidget {
   const AvatarTop({

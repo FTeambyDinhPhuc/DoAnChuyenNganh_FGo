@@ -1,4 +1,5 @@
-const String google_map_api_key = "AIzaSyCtydqLWhaYUxDzEyUuvyJEwvf15KtavwY";
+//quan trọng không được dụng vào
+late final String google_map_api_key;
 
 //size
 const double defaultPadding = 16.0;
@@ -17,7 +18,9 @@ const double defaultthickness = 2.0;
 // Trạng thái chuyến đi
 const String statusWaitForConfirmation = 'Chờ xác nhận';
 const String statusBooked = 'Đã đặt';
-const String statusStarting = 'Đang chạy';
+const String statusStarting = 'Bắt đầu';
+const String statusToPickUpPoint = 'Đến điểm đón';
+const String statusStartTheTrip = 'Khởi hành';
 const String statusCompleted = 'Hoàn thành';
 const String statusCancelled = 'Đã hủy';
 //Title thông báo snackbar
@@ -26,6 +29,11 @@ const String titleSnackbarOrder = 'Chuyến đi';
 
 //Type trong address components API google map
 const String typeDistrict = 'administrative_area_level_2';
-//
+
+//mức giá cơ bản để tính thành tiền chuyến đi
 const int gasPrice = 23000;
 const int wage = 5000;
+
+//Trạng thái đánh giá đơn
+const String notYetRated = 'Chưa đánh giá';
+const String haveEvaluated = 'Đã đánh giá';

@@ -1,8 +1,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.fgo">
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
    <application
         android:label="fgo"
         android:name="${applicationName}"
+        android:usesCleartextTraffic="true"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"
@@ -30,7 +33,7 @@
         
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyCtydqLWhaYUxDzEyUuvyJEwvf15KtavwY"
+            android:value="AIzaSyCFVDMMCaYuGcycRCZW9h7PCX4-m1vd4zU"
         /> 
         <meta-data
             android:name="flutterEmbedding"

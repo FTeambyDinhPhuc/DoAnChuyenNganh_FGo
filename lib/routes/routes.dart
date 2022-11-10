@@ -1,4 +1,6 @@
 import 'package:fgo/bindings/add_order_binding.dart';
+import 'package:fgo/bindings/home_binding.dart';
+import 'package:fgo/bindings/login_binding.dart';
 import 'package:fgo/bindings/register_binding.dart';
 import 'package:fgo/views/addorder/add_order_screen.dart';
 import 'package:fgo/views/changepassword/change_password_screen.dart';
@@ -23,11 +25,13 @@ class RoutesClass {
     GetPage(
         name: home,
         page: () => const MyHomePage(),
+        binding: HomeBinding(),
         transition: Transition.fadeIn,
         transitionDuration: const Duration(milliseconds: 500)),
     GetPage(
         name: login,
         page: () => const Login(),
+        binding: LoginBinding(),
         transition: Transition.fadeIn,
         transitionDuration: const Duration(milliseconds: 700)),
     GetPage(
