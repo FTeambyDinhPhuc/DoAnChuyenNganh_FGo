@@ -1,5 +1,5 @@
 import 'package:fgo/models/custommer_model.dart';
-import 'package:fgo/services/fgoapp_services.dart';
+import 'package:fgo/services/fgo_app_services.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 

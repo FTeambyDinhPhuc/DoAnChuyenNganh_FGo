@@ -1,6 +1,6 @@
 import 'package:fgo/constants.dart';
 import 'package:fgo/routes/routes.dart';
-import 'package:fgo/services/fgoapp_services.dart';
+import 'package:fgo/services/fgo_app_services.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

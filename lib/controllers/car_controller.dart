@@ -1,6 +1,6 @@
 import 'package:fgo/models/car_model.dart';
 
-import 'package:fgo/services/fgoapp_services.dart';
+import 'package:fgo/services/fgo_app_services.dart';
 import 'package:get/get.dart';
 
 class CarController extends GetxController {

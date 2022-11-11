@@ -1,6 +1,6 @@
 import 'package:fgo/constants.dart';
 import 'package:fgo/models/order_model.dart';
-import 'package:fgo/services/fgoapp_services.dart';
+import 'package:fgo/services/fgo_app_services.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';

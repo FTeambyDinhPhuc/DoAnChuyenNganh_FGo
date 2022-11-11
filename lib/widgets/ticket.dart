@@ -14,6 +14,7 @@ import 'package:fgo/methodshares/hero_dialog_route.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
 class Ticket extends StatefulWidget {
   const Ticket({Key? key, required this.order}) : super(key: key);
@@ -225,6 +226,7 @@ class _TicketPopup extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var moneyFormat = new NumberFormat("###,###,###");
     return Center(
       child: Padding(
         padding: const EdgeInsets.all(defaultPadding),
@@ -316,6 +318,15 @@ class _TicketPopup extends StatelessWidget {
                         _InfoOrder(
                           titleInfo: 'Giờ bắt đầu',
                           describe: order.giodon,
+                        ),
+                        _InfoOrder(
+                          titleInfo: 'Quảng đường',
+                          describe: '${order.quangduong.toString()} km',
+                        ),
+                        _InfoOrder(
+                          titleInfo: 'Tổng tiền',
+                          describe:
+                              '${moneyFormat.format(order.thanhtien)} vnđ',
                         ),
                         order.trangthai != statusBooked &&
                                 order.trangthai != statusWaitForConfirmation
