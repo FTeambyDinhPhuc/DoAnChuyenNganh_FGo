@@ -21,7 +21,6 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   void initState() {
     _homeController.getIdCustommer();
-    _homeController.getGoogleMapAPIKey();
     super.initState();
   }
 

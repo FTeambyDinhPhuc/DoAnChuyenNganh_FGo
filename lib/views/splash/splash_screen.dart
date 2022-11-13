@@ -1,4 +1,5 @@
-import 'package:fgo/routes/routes.dart';
+import 'package:fgo/controllers/splash_controller.dart';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -10,13 +11,11 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+  var _splashController = Get.find<SplashController>();
   @override
   void initState() {
     super.initState();
-
-    Future.delayed(const Duration(milliseconds: 1000)).then((value) {
-      Get.offNamed(RoutesClass.login);
-    });
+    _splashController.getGoogleMapAPIKey();
   }
 
   @override
