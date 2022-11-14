@@ -1,9 +1,6 @@
 import 'package:fgo/constants.dart';
-
 import 'package:fgo/controllers/register_controller.dart';
-import 'package:fgo/routes/routes.dart';
 import 'package:fgo/views/register/components/select_orther_register.dart';
-
 import 'package:fgo/views/register/components/text_field_register.dart';
 import 'package:fgo/widgets/button_full_width.dart';
 import 'package:flutter/material.dart';

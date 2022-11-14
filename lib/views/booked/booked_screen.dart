@@ -1,6 +1,6 @@
+import 'package:fgo/constants.dart';
 import 'package:fgo/controllers/home_controller.dart';
 import 'package:fgo/controllers/order_controller.dart';
-
 import 'package:fgo/views/booked/components/add_order_button.dart';
 import 'package:fgo/widgets/list_order.dart';
 import 'package:flutter/material.dart';
@@ -55,13 +55,22 @@ class _BookedScreenState extends State<BookedScreen> {
                   ),
                   AddOrderButton(),
                 ])
-              : Stack(
-                  children: [
-                    ListOrder(
-                      list: _controller.bookedOrderList!,
-                    ),
-                    AddOrderButton(),
-                  ],
+              : RefreshIndicator(
+                  onRefresh: () async {
+                    _controller.getBookedOrder(
+                        int.parse(_homeController.idCustommer.value));
+                  },
+                  child: Stack(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(top: defaultPadding),
+                        child: ListOrder(
+                          list: _controller.bookedOrderList!,
+                        ),
+                      ),
+                      AddOrderButton(),
+                    ],
+                  ),
                 )),
     );
   }

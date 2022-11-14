@@ -20,9 +20,9 @@ class _AccountScreenState extends State<AccountScreen> {
 
   @override
   void initState() {
+    super.initState();
     _custommerController
         .getCustommer(int.parse(_homeController.idCustommer.value));
-    super.initState();
   }
 
   @override

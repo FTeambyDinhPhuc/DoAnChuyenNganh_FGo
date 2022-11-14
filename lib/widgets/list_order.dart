@@ -1,5 +1,5 @@
 import 'package:fgo/models/order_model.dart';
-import 'package:fgo/widgets/ticket.dart';
+import 'package:fgo/widgets/ticket/ticket.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

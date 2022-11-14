@@ -45,7 +45,7 @@ dependencies:
   intl: ^0.17.0
   json_serializable: ^6.4.0
   image_picker: ^0.8.6
-  coder0211: ^0.0.79
+  flutter_rating_bar: ^4.0.1
 
 dev_dependencies:
   flutter_test:

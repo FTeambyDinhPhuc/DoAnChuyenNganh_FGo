@@ -1,3 +1,4 @@
+import 'package:fgo/constants.dart';
 import 'package:fgo/controllers/home_controller.dart';
 import 'package:fgo/controllers/order_controller.dart';
 import 'package:fgo/widgets/list_order.dart';
@@ -16,8 +17,8 @@ class _HistoryScreenState extends State<HistoryScreen> {
   var _homeController = Get.find<HomeController>();
   @override
   void initState() {
-    _controller.getHistoryOrder(int.parse(_homeController.idCustommer.value));
     super.initState();
+    _controller.getHistoryOrder(int.parse(_homeController.idCustommer.value));
   }
 
   @override
@@ -51,12 +52,17 @@ class _HistoryScreenState extends State<HistoryScreen> {
                       ],
                     ),
                   )
-                : Stack(
-                    children: [
-                      ListOrder(
+                : RefreshIndicator(
+                    onRefresh: () async {
+                      _controller.getHistoryOrder(
+                          int.parse(_homeController.idCustommer.value));
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.only(top: defaultPadding),
+                      child: ListOrder(
                         list: _controller.historyOrderList!,
                       ),
-                    ],
+                    ),
                   ),
       ),
     );

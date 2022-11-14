@@ -25,7 +25,8 @@ class OrderController extends GetxController {
   //Thành tiền
   var totalMoney = 0.obs;
 
-  void getBookedOrder(int id) async {
+  getBookedOrder(int id) async {
+    isLoadingBookedScreen.value = true;
     var list = await FGoAppServices.fetchBookedOrderList(id);
     if (list != null) {
       bookedOrderList = list.obs;
@@ -33,7 +34,8 @@ class OrderController extends GetxController {
     }
   }
 
-  void getStartingOrder(int id, String dateNow) async {
+  getStartingOrder(int id, String dateNow) async {
+    isLoadingNowScreen.value = true;
     var list = await FGoAppServices.fetchStartingOrderList(id, dateNow);
     if (list != null) {
       startingOrderList = list.obs;
@@ -42,6 +44,7 @@ class OrderController extends GetxController {
   }
 
   getHistoryOrder(int id) async {
+    isLoadingHistoryScreen.value = true;
     var list = await FGoAppServices.fetchHistoryOrderList(id);
     if (list != null) {
       historyOrderList = list.obs;

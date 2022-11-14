@@ -1,4 +1,3 @@
-import 'package:fgo/constants.dart';
 import 'package:fgo/controllers/home_controller.dart';
 import 'package:fgo/views/account/account_screen.dart';
 import 'package:fgo/views/booked/booked_screen.dart';
