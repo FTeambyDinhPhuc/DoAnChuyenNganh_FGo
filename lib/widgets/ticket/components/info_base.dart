@@ -1,90 +1,73 @@
 import 'package:fgo/constants.dart';
 import 'package:fgo/models/driver_model.dart';
 import 'package:fgo/models/order_model.dart';
+import 'package:fgo/widgets/ticket/components/color_ticket.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
 class InfoBase extends StatelessWidget {
-  InfoBase({Key? key, required this.order, this.driver}) : super(key: key);
+  InfoBase({Key? key, required this.order, this.driver, required this.diemDen})
+      : super(key: key);
   final OrderModel order;
-
+  RxString diemDen;
   DriverModel? driver;
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      scrollDirection: Axis.horizontal,
-      child: Row(
-        children: [
-          CircleAvatar(
-            backgroundImage: AssetImage(
-              order.idTaixe == null
-                  ? 'assets/images/image_avatar_null.png'
-                  : driver!.hinh,
+    var moneyFormat = new NumberFormat("###,###,###");
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          children: [
+            Icon(
+              order.trangthai == statusCancelled
+                  ? Icons.cancel_rounded
+                  : Icons.check_circle,
+              color: ColorTicket(order),
+              size: 10,
             ),
-            radius: defaultSizeImage,
-          ),
-          const SizedBox(width: defaultPadding),
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                order.idTaixe == null ? 'Chưa có tài xế' : driver!.tentaixe,
-                style: Theme.of(context).textTheme.headline5,
+            Text(order.trangthai,
+                style: Theme.of(context)
+                    .textTheme
+                    .bodyText1!
+                    .copyWith(color: ColorTicket(order))),
+            Padding(
+              padding: const EdgeInsets.all(2),
+              child: Icon(
+                Icons.noise_control_off,
+                color: Color(0xFF1B070B),
+                size: 10,
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Icon(
-                    FontAwesomeIcons.solidStar,
-                    size: defaultSizeIcon,
-                    color: Colors.yellow,
-                  ),
-                  const SizedBox(width: defaultPadding * 0.5),
-                  Text(
-                    order.idTaixe == null ? '0' : driver!.sosao.toString(),
-                    style: Theme.of(context).textTheme.headline6,
-                  ),
-                  const SizedBox(width: defaultPadding),
-                ],
+            ),
+            Text('${order.ngaydon}',
+                style: Theme.of(context).textTheme.bodyText1),
+          ],
+        ),
+        Padding(
+          padding: const EdgeInsets.fromLTRB(
+              0, defaultPadding / 2, 0, defaultPadding),
+          child:
+              Text('${diemDen}', style: Theme.of(context).textTheme.headline6),
+        ),
+        Row(
+          children: [
+            Text('${moneyFormat.format(order.thanhtien)} đ',
+                style: Theme.of(context).textTheme.bodyText1),
+            Padding(
+              padding: const EdgeInsets.all(2),
+              child: Icon(
+                Icons.noise_control_off,
+                color: Color(0xFF1B070B),
+                size: 10,
               ),
-            ],
-          ),
-          const SizedBox(width: defaultPadding),
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Row(
-                children: [
-                  Text(
-                    "Mã đơn: ",
-                    style: Theme.of(context).textTheme.bodyText1,
-                  ),
-                  Text(
-                    order.idChuyenxe.toString(),
-                    style: Theme.of(context).textTheme.headline6,
-                  )
-                ],
-              ),
-              Text(
-                order.danhgia == null ? notYetRated : haveEvaluated,
-                style: Theme.of(context).textTheme.headline6,
-              )
-            ],
-          ),
-          const SizedBox(width: defaultPadding),
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text('${order.ngaydon}',
-                  style: Theme.of(context).textTheme.bodyText1),
-              Text('Trạng thái', style: Theme.of(context).textTheme.bodyText1),
-              Text(order.trangthai,
-                  style: Theme.of(context).textTheme.headline5),
-            ],
-          ),
-        ],
-      ),
+            ),
+            Text('${order.quangduong} km',
+                style: Theme.of(context).textTheme.bodyText1),
+          ],
+        ),
+      ],
     );
   }
 }

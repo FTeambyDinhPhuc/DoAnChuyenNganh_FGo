@@ -29,7 +29,7 @@ class AvatarTop extends StatelessWidget {
           },
           child: Text(
             "Đổi ảnh đại diện",
-            style: Theme.of(context).textTheme.headline6,
+            style: Theme.of(context).textTheme.bodyText1,
           ),
         )
       ],

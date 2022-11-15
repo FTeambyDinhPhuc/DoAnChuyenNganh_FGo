@@ -18,11 +18,11 @@ class InfoOrder extends StatelessWidget {
       children: [
         Text(
           titleInfo,
-          style: Theme.of(context).textTheme.bodyText1,
+          style: Theme.of(context).textTheme.headline6,
         ),
         Text(
           describe,
-          style: Theme.of(context).textTheme.headline5,
+          style: Theme.of(context).textTheme.bodyText1,
         ),
         const Divider(
           thickness: defaultthickness,

@@ -23,7 +23,7 @@ class ActionButton extends StatelessWidget {
       children: [
         ButtonFullWidth(
           text: 'Đổi mật khẩu',
-          color: Colors.blue.shade300,
+          color: blueColor,
           press: () {
             Get.toNamed(RoutesClass.changePassword);
           },

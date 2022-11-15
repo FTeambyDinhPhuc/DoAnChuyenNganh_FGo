@@ -35,12 +35,12 @@ class RoutesClass {
     GetPage(
         name: login,
         page: () => const Login(),
-        binding: LoginBinding(),
         transition: Transition.fadeIn,
         transitionDuration: const Duration(milliseconds: 700)),
     GetPage(
         name: loginWithPhoneNumber,
         page: () => const LoginWithPhoneNumber(),
+        binding: LoginBinding(),
         transition: Transition.rightToLeft,
         transitionDuration: const Duration(milliseconds: 300)),
     GetPage(

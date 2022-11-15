@@ -24,54 +24,60 @@ class _BookedScreenState extends State<BookedScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Center(
-          child: Text(
-            'Lịch đặt xe',
-            style: Theme.of(context).textTheme.headline3,
-          ),
-        ),
-      ),
-      body: Obx(() => _controller.isLoadingBookedScreen.value
-          ? Center(
-              child: CircularProgressIndicator(
-                  valueColor:
-                      AlwaysStoppedAnimation<Color>(Colors.blue.shade200)),
-            )
-          : _controller.bookedOrderList!.length == 0
-              ? Stack(children: [
-                  Center(
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Image.asset('assets/images/bongocat.gif'),
-                        Text(
-                          'Bạn không có chuyến đi nào!',
-                          style: Theme.of(context).textTheme.headline2,
-                        ),
-                      ],
-                    ),
-                  ),
-                  AddOrderButton(),
-                ])
-              : RefreshIndicator(
-                  onRefresh: () async {
-                    _controller.getBookedOrder(
-                        int.parse(_homeController.idCustommer.value));
-                  },
-                  child: Stack(
+    return Obx(() => _controller.isLoadingBookedScreen.value
+        ? Center(
+            child: CircularProgressIndicator(
+                valueColor:
+                    AlwaysStoppedAnimation<Color>(Colors.blue.shade200)),
+          )
+        : _controller.bookedOrderList!.length == 0
+            ? Stack(children: [
+                Center(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
                     children: [
-                      Padding(
-                        padding: const EdgeInsets.only(top: defaultPadding),
-                        child: ListOrder(
-                          list: _controller.bookedOrderList!,
-                        ),
+                      Image.asset('assets/images/bongocat.gif'),
+                      Text(
+                        'Bạn không có chuyến đi nào!',
+                        style: Theme.of(context).textTheme.headline2,
                       ),
-                      AddOrderButton(),
                     ],
                   ),
-                )),
-    );
+                ),
+                AddOrderButton(),
+              ])
+            : RefreshIndicator(
+                onRefresh: () async {
+                  _controller.getBookedOrder(
+                      int.parse(_homeController.idCustommer.value));
+                },
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(
+                          left: defaultPaddingSmall,
+                          bottom: defaultPadding,
+                          top: defaultPadding),
+                      child: Align(
+                        alignment: Alignment.topLeft,
+                        child: Text(
+                          'Lịch di chuyển',
+                          style: Theme.of(context).textTheme.headline2,
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: Stack(
+                        children: [
+                          ListOrder(
+                            list: _controller.bookedOrderList!,
+                          ),
+                          AddOrderButton(),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ));
   }
 }

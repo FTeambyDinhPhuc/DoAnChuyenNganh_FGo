@@ -1,3 +1,4 @@
+import 'package:fgo/constants.dart';
 import 'package:fgo/controllers/splash_controller.dart';
 
 import 'package:flutter/material.dart';
@@ -29,8 +30,8 @@ class _SplashScreenState extends State<SplashScreen> {
               begin: Alignment.topRight,
               end: Alignment.bottomLeft,
               colors: [
-                Colors.teal,
-                Colors.indigo,
+                primaryColor,
+                blueColor,
               ]),
         ),
         child: Column(

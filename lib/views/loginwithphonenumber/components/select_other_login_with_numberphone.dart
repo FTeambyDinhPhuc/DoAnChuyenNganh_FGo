@@ -17,28 +17,13 @@ class SelectOtherLoginWithNumberphone extends StatelessWidget {
     return Column(
       children: [
         const OrDivider(),
-        Padding(
-          padding: const EdgeInsets.all(21),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              ButtonIconSmall(
-                icon: FontAwesomeIcons.google,
-                colorIcon: Colors.white,
-                colorBackground: Colors.orange.shade800,
-                press: () {},
-              ),
-              ButtonIconSmall(
-                icon: FontAwesomeIcons.facebook,
-                colorIcon: Colors.white,
-                colorBackground: Colors.blue,
-                press: () {},
-              ),
-            ],
-          ),
+        const SizedBox(
+          height: 17,
         ),
         Padding(
-          padding: const EdgeInsets.only(bottom: defaultPaddingBottom),
+          padding: const EdgeInsets.only(
+            bottom: defaultPaddingBottom,
+          ),
           child: TextQuestionSelect(
             question: "Chưa có tài khoản? ",
             select: "Đăng ký",

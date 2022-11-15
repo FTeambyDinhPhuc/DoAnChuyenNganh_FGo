@@ -24,7 +24,7 @@ class SelectCarRadioButton extends StatelessWidget {
             style: Theme.of(context).textTheme.headline4,
           ),
           tileColor: dataSelected == valueButton
-              ? Colors.teal.shade300
+              ? Theme.of(context).primaryColor
               : Colors.grey.shade300,
           value: valueButton,
           groupValue: dataSelected.value,

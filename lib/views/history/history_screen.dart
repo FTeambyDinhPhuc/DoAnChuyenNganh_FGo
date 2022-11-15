@@ -23,48 +23,54 @@ class _HistoryScreenState extends State<HistoryScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Center(
-          child: Text(
-            'Lịch sử chuyến đi',
-            style: Theme.of(context).textTheme.headline3,
-          ),
-        ),
-      ),
-      body: Obx(
-        () => _controller.isLoadingHistoryScreen.value
-            ? Center(
-                child: CircularProgressIndicator(
-                    valueColor:
-                        AlwaysStoppedAnimation<Color>(Colors.blue.shade200)),
-              )
-            : _controller.historyOrderList!.length == 0
-                ? Center(
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Image.asset('assets/images/bongocat.gif'),
-                        Text(
-                          'Bạn không có lịch sử!',
-                          style: Theme.of(context).textTheme.headline2,
-                        ),
-                      ],
-                    ),
-                  )
-                : RefreshIndicator(
-                    onRefresh: () async {
-                      _controller.getHistoryOrder(
-                          int.parse(_homeController.idCustommer.value));
-                    },
-                    child: Padding(
-                      padding: const EdgeInsets.only(top: defaultPadding),
-                      child: ListOrder(
-                        list: _controller.historyOrderList!,
+    return Obx(
+      () => _controller.isLoadingHistoryScreen.value
+          ? Center(
+              child: CircularProgressIndicator(
+                  valueColor:
+                      AlwaysStoppedAnimation<Color>(Colors.blue.shade200)),
+            )
+          : _controller.historyOrderList!.length == 0
+              ? Center(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Image.asset('assets/images/bongocat.gif'),
+                      Text(
+                        'Bạn không có lịch sử!',
+                        style: Theme.of(context).textTheme.headline2,
                       ),
-                    ),
+                    ],
                   ),
-      ),
+                )
+              : RefreshIndicator(
+                  onRefresh: () async {
+                    _controller.getHistoryOrder(
+                        int.parse(_homeController.idCustommer.value));
+                  },
+                  child: Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(
+                            left: defaultPaddingSmall,
+                            bottom: defaultPadding,
+                            top: defaultPadding),
+                        child: Align(
+                          alignment: Alignment.topLeft,
+                          child: Text(
+                            'Lịch sử chuyến đi',
+                            style: Theme.of(context).textTheme.headline2,
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        child: ListOrder(
+                          list: _controller.historyOrderList!,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
     );
   }
 }

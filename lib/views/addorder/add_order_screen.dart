@@ -108,7 +108,7 @@ class _AddOrderScreenState extends State<AddOrderScreen> {
                                       .selectQuantity), // chọn loại xe
                               const SizedBox(height: defaultPadding),
                               ButtonFullWidth(
-                                color: Colors.blue.shade300,
+                                color: blueColor,
                                 text: 'Xác nhận',
                                 press: () async {
                                   if (_placeController

@@ -35,7 +35,7 @@ class _RegisterState extends State<Register> {
         child: Center(
           child: SingleChildScrollView(
             child: Column(
-              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 TextFieldRegister(registercontroller: _registerController),
                 ButtonFullWidth(
@@ -43,8 +43,12 @@ class _RegisterState extends State<Register> {
                     press: () {
                       _registerController.register();
                     }),
-                const SizedBox(height: defaultPadding * 2),
-                SelectOtherRegister()
+                Padding(
+                  padding: const EdgeInsets.only(
+                    top: defaultPaddingLarge,
+                  ),
+                  child: SelectOtherRegister(),
+                )
               ],
             ),
           ),

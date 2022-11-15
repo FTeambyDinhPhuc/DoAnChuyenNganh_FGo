@@ -1,3 +1,4 @@
+import 'package:fgo/constants.dart';
 import 'package:fgo/models/order_model.dart';
 import 'package:fgo/widgets/ticket/ticket.dart';
 import 'package:flutter/material.dart';
@@ -17,7 +18,10 @@ class ListOrder extends StatelessWidget {
     return Obx(() => ListView.builder(
         itemCount: _list.length,
         itemBuilder: (BuildContext context, int index) {
-          return Ticket(order: _list[index]);
+          return Padding(
+            padding: const EdgeInsets.only(bottom: defaultPaddingSmall),
+            child: Ticket(order: _list[index]),
+          );
         }));
   }
 }

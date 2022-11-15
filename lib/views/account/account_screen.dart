@@ -27,39 +27,47 @@ class _AccountScreenState extends State<AccountScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Center(
-          child: Text(
-            'Thông tin tài khoản ',
-            style: Theme.of(context).textTheme.headline3,
-          ),
-        ),
-      ),
-      body: Obx(() => _custommerController.isLoading.value
+    return Obx(
+      () => _custommerController.isLoading.value
           ? Center(
               child: CircularProgressIndicator(
                   valueColor:
                       AlwaysStoppedAnimation<Color>(Colors.blue.shade200)),
             )
-          : Padding(
-              padding: const EdgeInsets.all(defaultPadding),
-              child: SingleChildScrollView(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    AvatarTop(custommerController: _custommerController),
-                    const SizedBox(height: defaultPadding * 2),
-                    InfoAccount(custommerController: _custommerController),
-                    const SizedBox(height: defaultPadding * 2),
-                    ActionButton(
-                      custommerController: _custommerController,
-                      homeController: _homeController,
-                    )
-                  ],
+          : Column(
+              children: [
+                Container(
+                  width: Get.width,
+                  color: scaffoldBackgroundColor,
+                  padding: EdgeInsets.fromLTRB(
+                      defaultPaddingSmall, defaultPadding, 0, defaultPadding),
+                  child: Text(
+                    'Thông tin tài khoản',
+                    style: Theme.of(context).textTheme.headline2,
+                  ),
                 ),
-              ),
-            )),
+                Expanded(
+                  child: Container(
+                    padding: EdgeInsets.all(defaultPadding),
+                    child: SingleChildScrollView(
+                      child: Column(
+                        children: [
+                          AvatarTop(custommerController: _custommerController),
+                          const SizedBox(height: defaultPadding * 2),
+                          InfoAccount(
+                              custommerController: _custommerController),
+                          const SizedBox(height: defaultPadding * 2),
+                          ActionButton(
+                            custommerController: _custommerController,
+                            homeController: _homeController,
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
     );
   }
 }

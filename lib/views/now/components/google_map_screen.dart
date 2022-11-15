@@ -1,3 +1,4 @@
+import 'package:fgo/constants.dart';
 import 'package:fgo/controllers/location_controller.dart';
 import 'package:fgo/controllers/order_controller.dart';
 import 'package:fgo/widgets/ticket/ticket.dart';
@@ -19,44 +20,45 @@ class GoogleMapScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-          title: Center(
-        child: Text(
-          '${_orderController.startingOrderList![0].trangthai}',
-          style: Theme.of(context).textTheme.headline3,
-        ),
+    return Column(children: [
+      Container(
+        width: Get.width,
+        color: scaffoldBackgroundColor,
+        padding: EdgeInsets.fromLTRB(
+            defaultPaddingSmall, defaultPadding, 0, defaultPadding),
+        child: Obx(() => Text(
+              '${_orderController.startingOrderList![0].trangthai}',
+              style: Theme.of(context).textTheme.headline2,
+            )),
+      ),
+      Expanded(child: Obx(
+        () {
+          if (_locationController.added.value) {
+            _locationController.updateCameraMap();
+          }
+          return GoogleMap(
+            myLocationEnabled: true,
+            myLocationButtonEnabled: false,
+            zoomGesturesEnabled: true,
+            zoomControlsEnabled: false,
+            initialCameraPosition: CameraPosition(
+                target: LatLng(_locationController.driverLatiTude.value,
+                    _locationController.driverLongiTude.value),
+                zoom: 16),
+            markers: {
+              Marker(
+                  markerId: MarkerId("currentLocation"),
+                  position: LatLng(_locationController.driverLatiTude.value,
+                      _locationController.driverLongiTude.value)),
+            },
+            onMapCreated: (mapController) {
+              _locationController.googleController.complete(mapController);
+              _locationController.added.value = true;
+            },
+          );
+        },
       )),
-      body: Stack(alignment: Alignment.bottomCenter, children: [
-        Expanded(child: Obx(
-          () {
-            if (_locationController.added.value) {
-              _locationController.updateCameraMap();
-            }
-            return GoogleMap(
-              myLocationEnabled: true,
-              myLocationButtonEnabled: false,
-              zoomGesturesEnabled: true,
-              zoomControlsEnabled: false,
-              initialCameraPosition: CameraPosition(
-                  target: LatLng(_locationController.driverLatiTude.value,
-                      _locationController.driverLongiTude.value),
-                  zoom: 16),
-              markers: {
-                Marker(
-                    markerId: MarkerId("currentLocation"),
-                    position: LatLng(_locationController.driverLatiTude.value,
-                        _locationController.driverLongiTude.value)),
-              },
-              onMapCreated: (mapController) {
-                _locationController.googleController.complete(mapController);
-                _locationController.added.value = true;
-              },
-            );
-          },
-        )),
-        Ticket(order: _orderController.startingOrderList![0])
-      ]),
-    );
+      Ticket(order: _orderController.startingOrderList![0])
+    ]);
   }
 }

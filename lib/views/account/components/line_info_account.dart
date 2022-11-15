@@ -24,7 +24,7 @@ class LineInfoAccount extends StatelessWidget {
               top: defaultPadding / 3, bottom: defaultPadding / 2),
           child: Text(
             infoAccount,
-            style: Theme.of(context).textTheme.headline4,
+            style: Theme.of(context).textTheme.bodyText1,
           ),
         ),
         const Divider(

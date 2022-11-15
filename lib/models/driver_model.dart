@@ -33,7 +33,7 @@ class DriverModel {
   String hinh;
   double? kinhdo;
   double? vido;
-  Double? sosao;
+  double? sosao;
 
   factory DriverModel.fromJson(Map<String, dynamic> json) => DriverModel(
         idTaixe: json["id_taixe"],

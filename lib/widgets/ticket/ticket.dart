@@ -7,11 +7,13 @@ import 'package:fgo/controllers/place_search_controller.dart';
 import 'package:fgo/models/order_model.dart';
 import 'package:fgo/models/place.dart';
 import 'package:fgo/methodshares/hero_dialog_route.dart';
-import 'package:fgo/widgets/ticket/components/color_ticket.dart';
+import 'package:fgo/widgets/ticket/components/action_order.dart';
 import 'package:fgo/widgets/ticket/components/info_base.dart';
 import 'package:fgo/widgets/ticket/components/ticket_pop_up.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
 class Ticket extends StatefulWidget {
   const Ticket({Key? key, required this.order}) : super(key: key);
@@ -103,35 +105,122 @@ class _TicketState extends State<Ticket> {
       child: Hero(
           tag: order.idChuyenxe,
           child: Container(
-            height: 100,
-            margin: EdgeInsets.fromLTRB(
-              defaultPadding,
-              0,
-              defaultPadding,
-              defaultPadding,
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(defaultCircular),
             ),
             padding: EdgeInsets.all(defaultPadding),
-            decoration: BoxDecoration(
-              color: ColorTicket(order),
-              borderRadius: BorderRadius.circular(defaultCircular),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey.shade500,
-                  offset: Offset(1.0, 1.0),
-                  blurRadius: 5.0,
+            child: Column(
+              children: [
+                InfoBase(
+                  diemDen: diemDen,
+                  order: order,
+                  driver: _driverController.driver,
                 ),
-                BoxShadow(
-                  color: Colors.white,
-                  offset: Offset(-1.0, -1.0),
-                  blurRadius: 5.0,
-                )
+                order.trangthai == statusWaitForConfirmation
+                    ? ActionOrder(
+                        title: 'Hủy chuyến',
+                        color: Colors.red,
+                        press: () {},
+                      )
+                    : order.trangthai == statusBooked
+                        ? order.ngaydon !=
+                                DateFormat("dd-MM-yyyy").format(DateTime.now())
+                            ? ActionOrder(
+                                title: 'Hủy chuyến',
+                                color: Colors.red,
+                                press: () {
+                                  _CancelOrder(context);
+                                },
+                              )
+                            : Container()
+                        : order.trangthai == statusCompleted
+                            ? order.danhgia == null
+                                ? ActionOrder(
+                                    title: 'Đánh giá',
+                                    color: Theme.of(context).primaryColor,
+                                    press: () {
+                                      _RatingOrder(context);
+                                    },
+                                  )
+                                : Container()
+                            : Container()
               ],
             ),
-            child: InfoBase(
-              order: order,
-              driver: _driverController.driver,
-            ),
           )),
+    );
+  }
+
+  Future<dynamic> _RatingOrder(BuildContext context) {
+    return showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text(
+          'Chuyến đi',
+          style: Theme.of(context).textTheme.headline4,
+        ),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(
+              'Đánh giá chuyến đi của bạn',
+              style: Theme.of(context).textTheme.headline6,
+            ),
+            RatingBar.builder(
+                minRating: 1,
+                initialRating: 3,
+                itemBuilder: (context, index) => Icon(
+                      Icons.star,
+                      color: Colors.amber,
+                    ),
+                onRatingUpdate: (rantingvalue) {
+                  print('Sao hiện tại: ${rantingvalue}');
+                })
+          ],
+        ),
+        actions: [
+          TextButton(
+              onPressed: () {
+                Get.back();
+              },
+              child: Text(
+                'Xác nhận',
+              )),
+        ],
+      ),
+    );
+  }
+
+  Future<dynamic> _CancelOrder(BuildContext context) {
+    return showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text(
+          'Chuyến đi',
+          style: Theme.of(context).textTheme.headline4,
+        ),
+        content: Text(
+          'Bạn chắc chắn muốn hủy chuyến không?',
+          style: Theme.of(context).textTheme.headline6,
+        ),
+        actions: [
+          TextButton(
+              onPressed: () {
+                Get.back();
+              },
+              child: Text(
+                'Không',
+              )),
+          TextButton(
+              onPressed: () {
+                _orderController.CancelOrder(order.idChuyenxe);
+              },
+              child: Text(
+                'Hủy chuyến',
+                style: TextStyle(color: Colors.red),
+              )),
+        ],
+      ),
     );
   }
 }

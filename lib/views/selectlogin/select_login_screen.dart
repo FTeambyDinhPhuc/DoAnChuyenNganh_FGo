@@ -13,25 +13,16 @@ class Login extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.only(
-                left: defaultPadding,
-                right: defaultPadding,
-                bottom: defaultPadding),
+        child: Padding(
+          padding: const EdgeInsets.only(
+              left: defaultPadding,
+              right: defaultPadding,
+              bottom: defaultPadding),
+          child: SingleChildScrollView(
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 ImageTop(),
                 ButtonLogin(),
-                const SizedBox(height: defaultPadding),
-                TextQuestionSelect(
-                  question: "Chưa có tài khoản? ",
-                  select: "Đăng ký",
-                  press: () {
-                    Get.toNamed(RoutesClass.register);
-                  },
-                )
               ],
             ),
           ),
