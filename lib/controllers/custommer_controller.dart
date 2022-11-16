@@ -10,6 +10,7 @@ class CustommerController extends GetxController {
 
   //Lấy thông tin tài khoản
   getCustommer(int id) async {
+    isLoading.value = true;
     custommer = await FGoAppServices.fetchCustommer(id);
     if (custommer != null) {
       isLoading.value = false;

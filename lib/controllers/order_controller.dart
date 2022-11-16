@@ -100,6 +100,7 @@ class OrderController extends GetxController {
     }
   }
 
+  //thêm đơn
   AddOrder(
     String idKhachhang,
     String diemDon,
@@ -124,6 +125,7 @@ class OrderController extends GetxController {
       print("Đặt chuyến lỗi!");
   }
 
+  //hủy đơn
   CancelOrder(int idChuyenXe) async {
     var cancelOrderSuccess = await FGoAppServices.fetchCancelOrder(idChuyenXe);
     if (cancelOrderSuccess == 1) {
@@ -131,6 +133,18 @@ class OrderController extends GetxController {
       Get.snackbar(titleSnackbarOrder, 'Hủy chuyến đi thành công');
     } else {
       print("Hủy chuyến lỗi!");
+    }
+  }
+
+  //đánh giá đơn
+  RatingOrder(String idChuyenXe, String diem) async {
+    var ratingOrderErorr =
+        await FGoAppServices.fetchRatingOrder(idChuyenXe, diem);
+    if (ratingOrderErorr == false) {
+      Get.back();
+      Get.snackbar(titleSnackbarOrder, 'Đánh giá thành công');
+    } else {
+      print("Đánh giá lỗi!");
     }
   }
 }

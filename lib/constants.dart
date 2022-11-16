@@ -8,6 +8,7 @@ Color primaryColor = const Color.fromRGBO(63, 193, 201, 1);
 Color scaffoldBackgroundColor = const Color.fromRGBO(247, 247, 247, 1);
 Color blueColor = const Color.fromRGBO(81, 147, 179, 1);
 Color orangeColor = const Color.fromRGBO(248, 212, 155, 1);
+Color borderColor = const Color.fromRGBO(36, 48, 49, 0.4);
 
 //size
 const double defaultPaddingLarge = 48;
@@ -22,7 +23,7 @@ const double defaultSizeIcon = 16.0;
 const double defaultSizeIconButton = 24.0;
 const double defaultSizeImage = 40.0;
 const double heightButton = 55.0;
-const double defaultthickness = 2.0;
+const double defaultthickness = 1.0;
 
 //text
 // Trạng thái chuyến đi

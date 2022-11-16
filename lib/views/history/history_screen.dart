@@ -51,10 +51,9 @@ class _HistoryScreenState extends State<HistoryScreen> {
                   child: Column(
                     children: [
                       Padding(
-                        padding: const EdgeInsets.only(
-                            left: defaultPaddingSmall,
-                            bottom: defaultPadding,
-                            top: defaultPadding),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: defaultPaddingSmall,
+                            vertical: defaultPadding),
                         child: Align(
                           alignment: Alignment.topLeft,
                           child: Text(

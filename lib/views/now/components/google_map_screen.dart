@@ -24,8 +24,8 @@ class GoogleMapScreen extends StatelessWidget {
       Container(
         width: Get.width,
         color: scaffoldBackgroundColor,
-        padding: EdgeInsets.fromLTRB(
-            defaultPaddingSmall, defaultPadding, 0, defaultPadding),
+        padding: EdgeInsets.symmetric(
+            horizontal: defaultPaddingSmall, vertical: defaultPadding),
         child: Obx(() => Text(
               '${_orderController.startingOrderList![0].trangthai}',
               style: Theme.of(context).textTheme.headline2,

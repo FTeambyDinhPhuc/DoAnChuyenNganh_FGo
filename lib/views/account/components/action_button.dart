@@ -3,6 +3,7 @@ import 'package:fgo/controllers/custommer_controller.dart';
 import 'package:fgo/controllers/home_controller.dart';
 import 'package:fgo/routes/routes.dart';
 import 'package:fgo/widgets/button_full_width.dart';
+import 'package:fgo/widgets/button_full_width_outline.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -23,15 +24,15 @@ class ActionButton extends StatelessWidget {
       children: [
         ButtonFullWidth(
           text: 'Đổi mật khẩu',
-          color: blueColor,
+          color: Theme.of(context).primaryColor,
           press: () {
             Get.toNamed(RoutesClass.changePassword);
           },
         ),
         const SizedBox(height: defaultPadding),
-        ButtonFullWidth(
+        ButtonFullWidthOutline(
           text: 'Đăng xuất',
-          color: Colors.red.shade300,
+          color: Colors.red,
           press: () {
             _homeController.logout();
           },

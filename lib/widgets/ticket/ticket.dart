@@ -121,7 +121,9 @@ class _TicketState extends State<Ticket> {
                     ? ActionOrder(
                         title: 'Hủy chuyến',
                         color: Colors.red,
-                        press: () {},
+                        press: () {
+                          _CancelOrder(context);
+                        },
                       )
                     : order.trangthai == statusBooked
                         ? order.ngaydon !=
@@ -152,6 +154,7 @@ class _TicketState extends State<Ticket> {
   }
 
   Future<dynamic> _RatingOrder(BuildContext context) {
+    double diemDanhGia = 3;
     return showDialog(
       context: context,
       builder: (context) => AlertDialog(
@@ -174,6 +177,7 @@ class _TicketState extends State<Ticket> {
                       color: Colors.amber,
                     ),
                 onRatingUpdate: (rantingvalue) {
+                  diemDanhGia = rantingvalue;
                   print('Sao hiện tại: ${rantingvalue}');
                 })
           ],
@@ -181,7 +185,8 @@ class _TicketState extends State<Ticket> {
         actions: [
           TextButton(
               onPressed: () {
-                Get.back();
+                _orderController.RatingOrder(
+                    order.idChuyenxe.toString(), diemDanhGia.toString());
               },
               child: Text(
                 'Xác nhận',

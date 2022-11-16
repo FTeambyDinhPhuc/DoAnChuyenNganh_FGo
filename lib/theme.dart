@@ -6,9 +6,9 @@ class FgoTheme {
   static final lightTheme = ThemeData(
       fontFamily: "OpenSans",
       primaryColor: primaryColor,
-      // appBarTheme: AppBarTheme(
-      //   color: const Color.fromRGBO(83, 210, 220, 1),
-      // ),
+      appBarTheme: AppBarTheme(
+        color: primaryColor,
+      ),
       scaffoldBackgroundColor: scaffoldBackgroundColor,
       colorScheme: ThemeData().colorScheme.copyWith(
             primary: primaryColor,

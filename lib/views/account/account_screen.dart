@@ -37,19 +37,23 @@ class _AccountScreenState extends State<AccountScreen> {
           : Column(
               children: [
                 Container(
-                  width: Get.width,
                   color: scaffoldBackgroundColor,
-                  padding: EdgeInsets.fromLTRB(
-                      defaultPaddingSmall, defaultPadding, 0, defaultPadding),
-                  child: Text(
-                    'Thông tin tài khoản',
-                    style: Theme.of(context).textTheme.headline2,
+                  padding: EdgeInsets.symmetric(
+                      vertical: defaultPadding,
+                      horizontal: defaultPaddingSmall),
+                  child: Align(
+                    alignment: Alignment.topLeft,
+                    child: Text(
+                      'Thông tin tài khoản',
+                      style: Theme.of(context).textTheme.headline2,
+                    ),
                   ),
                 ),
                 Expanded(
-                  child: Container(
-                    padding: EdgeInsets.all(defaultPadding),
-                    child: SingleChildScrollView(
+                  child: SingleChildScrollView(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: defaultPadding),
                       child: Column(
                         children: [
                           AvatarTop(custommerController: _custommerController),

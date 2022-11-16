@@ -245,4 +245,25 @@ class FGoAppServices {
           'Máy chủ phản hồi: ${response.statusCode}: ${response.reasonPhrase.toString()}');
     }
   }
+
+  //hủy chuyến
+  static fetchRatingOrder(String idChuyenXe, String diem) async {
+    var map = {};
+    map['id_chuyenxe'] = idChuyenXe;
+    map['danhgia'] = diem;
+
+    final response = await http.patch(
+        Uri.parse('https://cn-api.fteamlp.top/api/users/capnhatsao'),
+        body: map);
+    if (response.statusCode == 200) {
+      final data = jsonDecode(response.body);
+      if (data['error'] == true) {
+        Get.snackbar('Lỗi đánh giá!', data['data']);
+      }
+      return data['error'];
+    } else {
+      Get.snackbar('Lỗi khi tải dữ liệu!',
+          'Máy chủ phản hồi: ${response.statusCode}: ${response.reasonPhrase.toString()}');
+    }
+  }
 }
