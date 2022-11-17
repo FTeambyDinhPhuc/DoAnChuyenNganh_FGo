@@ -31,7 +31,6 @@ const double defaultthickness = 1.0;
 // Trạng thái chuyến đi
 const String statusWaitForConfirmation = 'Chờ xác nhận';
 const String statusBooked = 'Đã đặt';
-const String statusStarting = 'Bắt đầu';
 const String statusToPickUpPoint = 'Đến điểm đón';
 const String statusStartTheTrip = 'Khởi hành';
 const String statusCompleted = 'Hoàn thành';
