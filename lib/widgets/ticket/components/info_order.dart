@@ -13,22 +13,28 @@ class InfoOrder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          titleInfo,
-          style: Theme.of(context).textTheme.headline6,
-        ),
-        Text(
-          describe,
-          style: Theme.of(context).textTheme.bodyText1,
-        ),
-        const Divider(
-          thickness: defaultthickness,
-        ),
-        const SizedBox(height: defaultPadding),
-      ],
+    return Container(
+      padding: EdgeInsets.all(defaultPaddingSmall),
+      margin: EdgeInsets.only(bottom: defaultPaddingSmall),
+      decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(defaultCircular)),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            titleInfo,
+            style: Theme.of(context).textTheme.headline6,
+          ),
+          const SizedBox(
+            height: defaultPaddingSuperSmall,
+          ),
+          Text(
+            describe,
+            style: Theme.of(context).textTheme.bodyText1,
+          ),
+        ],
+      ),
     );
   }
 }

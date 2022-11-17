@@ -14,6 +14,7 @@ Color borderColor = const Color.fromRGBO(36, 48, 49, 0.4);
 const double defaultPaddingLarge = 48;
 const double defaultPadding = 16.0;
 const double defaultPaddingSmall = 10.5;
+const double defaultPaddingSuperSmall = 3.2;
 const double defaultPaddingBottom = 51.0;
 const double defaultPaddingIcon = 20;
 
@@ -22,6 +23,7 @@ const double defaultSizeText = 16.0;
 const double defaultSizeIcon = 16.0;
 const double defaultSizeIconButton = 24.0;
 const double defaultSizeImage = 40.0;
+const double defaultSizeImageSmall = 30.0;
 const double heightButton = 55.0;
 const double defaultthickness = 1.0;
 
