@@ -246,7 +246,7 @@ class FGoAppServices {
     }
   }
 
-  //hủy chuyến
+  //đánh giá chuyến đi
   static fetchRatingOrder(String idChuyenXe, String diem) async {
     var map = {};
     map['id_chuyenxe'] = idChuyenXe;
