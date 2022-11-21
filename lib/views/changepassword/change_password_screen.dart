@@ -1,7 +1,5 @@
 import 'package:fgo/constants.dart';
-
 import 'package:fgo/views/changepassword/components/text_field_change_password.dart';
-
 import 'package:fgo/widgets/button_full_width.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

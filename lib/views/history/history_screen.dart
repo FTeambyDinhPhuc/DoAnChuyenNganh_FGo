@@ -23,53 +23,52 @@ class _HistoryScreenState extends State<HistoryScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Obx(
-      () => _controller.isLoadingHistoryScreen.value
-          ? Center(
-              child: CircularProgressIndicator(
-                  valueColor:
-                      AlwaysStoppedAnimation<Color>(Colors.blue.shade200)),
-            )
-          : _controller.historyOrderList!.length == 0
-              ? Center(
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Image.asset('assets/images/bongocat.gif'),
-                      Text(
-                        'Bạn không có lịch sử!',
-                        style: Theme.of(context).textTheme.headline2,
-                      ),
-                    ],
-                  ),
-                )
-              : RefreshIndicator(
-                  onRefresh: () async {
-                    _controller.getHistoryOrder(
-                        int.parse(_homeController.idCustommer.value));
-                  },
-                  child: Column(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: defaultPaddingSmall,
-                            vertical: defaultPadding),
-                        child: Align(
-                          alignment: Alignment.topLeft,
-                          child: Text(
-                            'Lịch sử chuyến đi',
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: const EdgeInsets.symmetric(
+              horizontal: defaultPaddingSmall, vertical: defaultPadding),
+          child: Text(
+            'Lịch sử chuyến đi',
+            style: Theme.of(context).textTheme.headline2,
+          ),
+        ),
+        Obx(() => _controller.isLoadingHistoryScreen.value
+            ? Expanded(
+                child: Center(
+                  child: CircularProgressIndicator(
+                      valueColor:
+                          AlwaysStoppedAnimation<Color>(Colors.blue.shade200)),
+                ),
+              )
+            : _controller.historyOrderList!.length == 0
+                ? Expanded(
+                    child: Center(
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Image.asset('assets/images/image_no_order.png'),
+                          Text(
+                            'Bạn không có lịch sử!',
                             style: Theme.of(context).textTheme.headline2,
                           ),
-                        ),
+                        ],
                       ),
-                      Expanded(
-                        child: ListOrder(
-                          list: _controller.historyOrderList!,
-                        ),
+                    ),
+                  )
+                : Expanded(
+                    child: RefreshIndicator(
+                      onRefresh: () async {
+                        _controller.getHistoryOrder(
+                            int.parse(_homeController.idCustommer.value));
+                      },
+                      child: ListOrder(
+                        list: _controller.historyOrderList!,
                       ),
-                    ],
-                  ),
-                ),
+                    ),
+                  )),
+      ],
     );
   }
 }

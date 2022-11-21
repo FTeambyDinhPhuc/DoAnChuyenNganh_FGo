@@ -39,7 +39,7 @@ class _NowScreenState extends State<NowScreen> {
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Image.asset('assets/images/bongocat.gif'),
+                    Image.asset('assets/images/image_no_order.png'),
                     Text(
                       'Hôm nay bạn không có lịch!',
                       style: Theme.of(context).textTheme.headline2,

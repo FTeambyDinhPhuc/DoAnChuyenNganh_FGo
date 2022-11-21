@@ -27,51 +27,49 @@ class _AccountScreenState extends State<AccountScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Obx(
-      () => _custommerController.isLoading.value
-          ? Center(
-              child: CircularProgressIndicator(
-                  valueColor:
-                      AlwaysStoppedAnimation<Color>(Colors.blue.shade200)),
-            )
-          : Column(
-              children: [
-                Container(
-                  color: scaffoldBackgroundColor,
-                  padding: EdgeInsets.symmetric(
-                      vertical: defaultPadding,
-                      horizontal: defaultPaddingSmall),
-                  child: Align(
-                    alignment: Alignment.topLeft,
-                    child: Text(
-                      'Thông tin tài khoản',
-                      style: Theme.of(context).textTheme.headline2,
-                    ),
-                  ),
-                ),
-                Expanded(
-                  child: SingleChildScrollView(
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: defaultPadding),
-                      child: Column(
-                        children: [
-                          AvatarTop(custommerController: _custommerController),
-                          const SizedBox(height: defaultPadding * 2),
-                          InfoAccount(
-                              custommerController: _custommerController),
-                          const SizedBox(height: defaultPadding * 2),
-                          ActionButton(
-                            custommerController: _custommerController,
-                            homeController: _homeController,
-                          )
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-              ],
+    return Column(
+      children: [
+        Container(
+          color: scaffoldBackgroundColor,
+          padding: EdgeInsets.symmetric(
+              vertical: defaultPadding, horizontal: defaultPaddingSmall),
+          child: Align(
+            alignment: Alignment.topLeft,
+            child: Text(
+              'Thông tin tài khoản',
+              style: Theme.of(context).textTheme.headline2,
             ),
+          ),
+        ),
+        Obx(() => _custommerController.isLoading.value
+            ? Expanded(
+                child: Center(
+                  child: CircularProgressIndicator(
+                      valueColor:
+                          AlwaysStoppedAnimation<Color>(Colors.blue.shade200)),
+                ),
+              )
+            : Expanded(
+                child: SingleChildScrollView(
+                  child: Padding(
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: defaultPadding),
+                    child: Column(
+                      children: [
+                        AvatarTop(custommerController: _custommerController),
+                        const SizedBox(height: defaultPadding * 2),
+                        InfoAccount(custommerController: _custommerController),
+                        const SizedBox(height: defaultPadding * 2),
+                        ActionButton(
+                          custommerController: _custommerController,
+                          homeController: _homeController,
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+              )),
+      ],
     );
   }
 }

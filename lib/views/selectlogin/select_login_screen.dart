@@ -1,8 +1,5 @@
 import 'package:fgo/constants.dart';
-import 'package:fgo/routes/routes.dart';
-import 'package:fgo/widgets/text_question_select.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'components/button_login.dart';
 import 'components/image_top.dart';
 

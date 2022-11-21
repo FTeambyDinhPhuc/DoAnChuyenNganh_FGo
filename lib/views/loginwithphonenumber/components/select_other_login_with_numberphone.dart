@@ -1,10 +1,8 @@
 import 'package:fgo/constants.dart';
 import 'package:fgo/routes/routes.dart';
-import 'package:fgo/widgets/button_icon_small.dart';
 import 'package:fgo/widgets/or_divider.dart';
 import 'package:fgo/widgets/text_question_select.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 
 class SelectOtherLoginWithNumberphone extends StatelessWidget {
