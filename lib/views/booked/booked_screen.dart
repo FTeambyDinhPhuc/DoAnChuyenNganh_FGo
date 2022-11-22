@@ -44,9 +44,9 @@ class _BookedScreenState extends State<BookedScreen> {
                 ),
               )
             : _controller.bookedOrderList!.length == 0
-                ? Stack(children: [
-                    Expanded(
-                      child: Center(
+                ? Expanded(
+                    child: Stack(children: [
+                      Center(
                         child: Column(
                           mainAxisSize: MainAxisSize.min,
                           children: [
@@ -58,9 +58,9 @@ class _BookedScreenState extends State<BookedScreen> {
                           ],
                         ),
                       ),
-                    ),
-                    AddOrderButton(),
-                  ])
+                      AddOrderButton(),
+                    ]),
+                  )
                 : Expanded(
                     child: Stack(
                       children: [

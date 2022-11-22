@@ -1,6 +1,7 @@
 import 'package:fgo/constants.dart';
 import 'package:fgo/controllers/custommer_controller.dart';
 import 'package:fgo/controllers/home_controller.dart';
+import 'package:fgo/routes/routes.dart';
 import 'package:fgo/views/account/components/action_button.dart';
 import 'package:fgo/views/account/components/avatar_top.dart';
 import 'package:fgo/views/account/components/info_account.dart';
@@ -28,17 +29,27 @@ class _AccountScreenState extends State<AccountScreen> {
   @override
   Widget build(BuildContext context) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Container(
           color: scaffoldBackgroundColor,
           padding: EdgeInsets.symmetric(
               vertical: defaultPadding, horizontal: defaultPaddingSmall),
-          child: Align(
-            alignment: Alignment.topLeft,
-            child: Text(
-              'Thông tin tài khoản',
-              style: Theme.of(context).textTheme.headline2,
-            ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                'Thông tin tài khoản',
+                style: Theme.of(context).textTheme.headline2,
+              ),
+              Obx(() => _custommerController.isLoading.value
+                  ? Container()
+                  : IconButton(
+                      onPressed: () {
+                        Get.toNamed(RoutesClass.updateInfo);
+                      },
+                      icon: Icon(Icons.create)))
+            ],
           ),
         ),
         Obx(() => _custommerController.isLoading.value

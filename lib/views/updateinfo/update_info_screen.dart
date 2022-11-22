@@ -1,25 +1,25 @@
 import 'package:fgo/constants.dart';
 import 'package:fgo/controllers/custommer_controller.dart';
 import 'package:fgo/controllers/home_controller.dart';
-import 'package:fgo/views/changepassword/components/text_field_change_password.dart';
+import 'package:fgo/views/updateinfo/components/text_field_change_info.dart';
 import 'package:fgo/widgets/button_full_width.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class ChangePassword extends StatefulWidget {
-  const ChangePassword({super.key});
+class UpdateInfoScreen extends StatefulWidget {
+  const UpdateInfoScreen({super.key});
 
   @override
-  State<ChangePassword> createState() => _ChangePasswordState();
+  State<UpdateInfoScreen> createState() => _UpdateInfoScreenState();
 }
 
-class _ChangePasswordState extends State<ChangePassword> {
+class _UpdateInfoScreenState extends State<UpdateInfoScreen> {
   var _custommerController = Get.find<CustommerController>();
   var _homeController = Get.find<HomeController>();
 
   @override
   void initState() {
-    _custommerController.getTextEditControllerChangePass();
+    _custommerController.getTextEditControllerChangeInfo();
     super.initState();
   }
 
@@ -35,15 +35,14 @@ class _ChangePasswordState extends State<ChangePassword> {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                TextFiledChangePassword(
-                    custommerController: _custommerController),
+                TextFiledChangeInfo(custommerController: _custommerController),
                 ButtonFullWidth(
                     text: "Xác nhận",
                     press: () {
-                      _custommerController.updatePass(
-                          _homeController.idCustommer.value,
-                          context,
-                          _homeController);
+                      _custommerController.updateInfo(
+                        _homeController.idCustommer.value,
+                        context,
+                      );
                     }),
                 const SizedBox(height: defaultPadding),
                 ButtonFullWidth(

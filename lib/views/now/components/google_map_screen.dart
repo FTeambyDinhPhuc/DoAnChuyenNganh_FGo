@@ -4,9 +4,10 @@ import 'package:fgo/controllers/order_controller.dart';
 import 'package:fgo/widgets/ticket/ticket.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get/get_state_manager/src/simple/list_notifier.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
-class GoogleMapScreen extends StatelessWidget {
+class GoogleMapScreen extends StatefulWidget {
   const GoogleMapScreen({
     Key? key,
     required OrderController orderController,
@@ -17,6 +18,35 @@ class GoogleMapScreen extends StatelessWidget {
 
   final OrderController _orderController;
   final LocationController _locationController;
+
+  @override
+  State<GoogleMapScreen> createState() => _GoogleMapScreenState(
+      locationController: _locationController,
+      orderController: _orderController);
+}
+
+class _GoogleMapScreenState extends State<GoogleMapScreen> {
+  _GoogleMapScreenState({
+    required OrderController orderController,
+    required LocationController locationController,
+  })  : _orderController = orderController,
+        _locationController = locationController;
+  final OrderController _orderController;
+  final LocationController _locationController;
+
+  @override
+  void initState() {
+    _locationController
+        .getDriverLocation(_orderController.startingOrderList![0].idTaixe!);
+    _locationController.getcurrentLocation();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _locationController.stopGetLocationDriver = true;
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -46,10 +76,16 @@ class GoogleMapScreen extends StatelessWidget {
                     _locationController.driverLongiTude.value),
                 zoom: 16),
             markers: {
-              Marker(
-                  markerId: MarkerId("currentLocation"),
-                  position: LatLng(_locationController.driverLatiTude.value,
-                      _locationController.driverLongiTude.value)),
+              _orderController.startingOrderList![0].trangthai != statusBooked
+                  ? Marker(
+                      markerId: MarkerId("driverLocation"),
+                      position: LatLng(_locationController.driverLatiTude.value,
+                          _locationController.driverLongiTude.value))
+                  : Marker(
+                      markerId: MarkerId("currentLocation"),
+                      position: LatLng(
+                          _locationController.currentLatiTude.value,
+                          _locationController.currentLatiTude.value)),
             },
             onMapCreated: (mapController) {
               _locationController.googleController.complete(mapController);

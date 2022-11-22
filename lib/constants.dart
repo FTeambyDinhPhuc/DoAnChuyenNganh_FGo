@@ -1,7 +1,10 @@
-//quan trọng không được dụng vào
 import 'package:flutter/animation.dart';
 
+//quan trọng không được dụng vào
 late String google_map_api_key;
+//mức giá cơ bản để tính thành tiền chuyến đi
+const int gasPrice = 23000;
+const int wage = 5000;
 
 //color
 Color primaryColor = const Color.fromRGBO(63, 193, 201, 1);
@@ -42,10 +45,6 @@ const String titleSnackbarOrder = 'Chuyến đi';
 
 //Type trong address components API google map
 const String typeDistrict = 'administrative_area_level_2';
-
-//mức giá cơ bản để tính thành tiền chuyến đi
-const int gasPrice = 23000;
-const int wage = 5000;
 
 //Trạng thái đánh giá đơn
 const String notYetRated = 'Chưa đánh giá';

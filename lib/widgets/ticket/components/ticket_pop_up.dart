@@ -89,9 +89,9 @@ class TicketPopup extends StatelessWidget {
                               shape: BoxShape.circle),
                           child: Center(
                             child: CircleAvatar(
-                              backgroundImage: AssetImage(
+                              backgroundImage: NetworkImage(
                                 order.idTaixe == null
-                                    ? 'assets/images/image_avatar_null.png'
+                                    ? 'https://i.imgur.com/4ilcvbb.png'
                                     : driver!.hinh,
                               ),
                               radius: defaultSizeImage,

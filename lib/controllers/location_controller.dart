@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:fgo/services/fgo_app_services.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
@@ -7,33 +8,49 @@ class LocationController extends GetxController {
   //Vị trí tài xế
   var driverLatiTude = 0.0.obs;
   var driverLongiTude = 0.0.obs;
+
+  //Vị trí bản thân
+  var currentLatiTude = 0.0.obs;
+  var currentLongiTude = 0.0.obs;
   //google map add thêm vị trí mới
   var added = false.obs;
-  //trạng thái đơn lấy từ api
-  var statusMove = 'Tài xế đang đến...'.obs;
+
   //google map controller
   Completer<GoogleMapController> googleController = Completer();
+
+  //dùng kéo vị trí tài xế
+  bool stopGetLocationDriver = true;
 
   @override
   void onInit() async {
     super.onInit();
-    getDriverLocation();
   }
 
-  void getDriverLocation() async {
+  void getcurrentLocation() {
     Location location = Location();
-    await location.getLocation().then(
+    location.getLocation().then(
       (location) {
-        driverLatiTude.value = location.latitude!;
-        driverLongiTude.value = location.longitude!;
+        currentLatiTude.value = location.latitude!;
+        currentLongiTude.value = location.longitude!;
       },
     );
-    location.onLocationChanged.listen(
-      (newLoc) {
-        driverLatiTude.value = newLoc.latitude!;
-        driverLongiTude.value = newLoc.longitude!;
-      },
-    );
+  }
+
+  //Lấy danh sách đơn hàng gợi ý
+  getDriverLocation(int idTaiXe) async {
+    stopGetLocationDriver = false;
+    Timer.periodic(Duration(seconds: 2), (timer) async {
+      var taiXe = await FGoAppServices.fetchDriver(idTaiXe);
+      if (taiXe != null) {
+        driverLatiTude.value = taiXe.vido!;
+        driverLongiTude.value = taiXe.kinhdo!;
+      }
+      print("Đang kéo vị trí tài xế");
+      if (stopGetLocationDriver == true) {
+        timer.cancel();
+        print("Dừng kéo vị trí");
+      }
+    });
   }
 
   void updateCameraMap() async {

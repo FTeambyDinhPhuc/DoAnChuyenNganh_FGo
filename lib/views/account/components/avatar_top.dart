@@ -1,6 +1,8 @@
 import 'package:fgo/constants.dart';
 import 'package:fgo/controllers/custommer_controller.dart';
+import 'package:fgo/routes/routes.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class AvatarTop extends StatelessWidget {
   const AvatarTop({
@@ -19,13 +21,13 @@ class AvatarTop extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.all(defaultPadding),
           child: CircleAvatar(
-            backgroundImage: AssetImage(_custommerController.custommer!.hinh),
+            backgroundImage: NetworkImage(_custommerController.custommer!.hinh),
             radius: defaultSizeImage,
           ),
         ),
         GestureDetector(
           onTap: () {
-            _custommerController.setImage();
+            Get.toNamed(RoutesClass.changeImage);
           },
           child: Text(
             "Đổi ảnh đại diện",

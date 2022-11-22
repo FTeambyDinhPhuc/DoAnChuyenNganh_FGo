@@ -14,6 +14,8 @@ class LoginController extends GetxController {
   Future<bool> saveLogin(CustommerModel custommer) async {
     await BaseSharedPreferences.setString(
         'id_khachhang', custommer.idKhachhang.toString());
+    await BaseSharedPreferences.setString(
+        'mk_khachhang', passwordController.text);
     return true;
   }
 
@@ -22,9 +24,11 @@ class LoginController extends GetxController {
     CustommerModel? custommer = await FGoAppServices.fetchLogin(
         numberPhoneController.text, passwordController.text);
     if (custommer != null) {
-      await BaseSharedPreferences.remove('id_khachhang');
-      saveLogin(custommer);
-      Get.offAllNamed(RoutesClass.home);
+      BaseSharedPreferences.remove('id_khachhang');
+      bool checkSaveAccount = await saveLogin(custommer);
+      if (checkSaveAccount) {
+        Get.offAllNamed(RoutesClass.home);
+      }
     } else
       print("Dữ liệu tài khoản chưa được đổ vào!");
   }

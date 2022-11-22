@@ -5,8 +5,8 @@ import 'package:fgo/widgets/text_field_with_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-class TextFiledChangePassword extends StatelessWidget {
-  TextFiledChangePassword({
+class TextFiledChangeInfo extends StatelessWidget {
+  TextFiledChangeInfo({
     Key? key,
     required CustommerController custommerController,
   })  : _custommerController = custommerController,
@@ -17,30 +17,30 @@ class TextFiledChangePassword extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
       Text(
-        "Đổi mật khẩu",
+        "Cập nhật thông tin",
         style: Theme.of(context).textTheme.headline1,
       ),
       Padding(
         padding: const EdgeInsets.only(
             top: defaultPadding * 2.5, bottom: defaultPadding * 1.5),
         child: Column(children: [
-          PassTextFieldWithIcon(
-            controller: _custommerController.matkhaucuController,
-            text: "Mật khẩu cũ",
-            icon: FontAwesomeIcons.lock,
-            inputType: TextInputType.visiblePassword,
-          ),
-          const SizedBox(height: defaultPadding),
-          PassTextFieldWithIcon(
-            controller: _custommerController.matkhaumoiController,
-            text: "Mật khẩu mới",
+          TextFieldWithIcon(
+            controller: _custommerController.sodienthoaiController,
+            text: "Số điện thoại",
             icon: FontAwesomeIcons.lock,
             inputType: TextInputType.visiblePassword,
           ),
           const SizedBox(height: defaultPadding),
           TextFieldWithIcon(
-            controller: _custommerController.xacnhanmatkhaumoiController,
-            text: "Xác nhận mật khẩu mới",
+            controller: _custommerController.tenkhachhangController,
+            text: "Tên khách hàng",
+            icon: FontAwesomeIcons.lock,
+            inputType: TextInputType.visiblePassword,
+          ),
+          const SizedBox(height: defaultPadding),
+          TextFieldWithIcon(
+            controller: _custommerController.cccdController,
+            text: "Căn cước công dân",
             icon: FontAwesomeIcons.lock,
             inputType: TextInputType.visiblePassword,
           ),

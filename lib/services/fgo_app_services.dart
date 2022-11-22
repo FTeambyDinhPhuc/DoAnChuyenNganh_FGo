@@ -87,6 +87,82 @@ class FGoAppServices {
     }
   }
 
+  //cập nhật mật khẩu khách hàng
+  static Future<bool?> fetchUpdatePass(
+    String idKhachHang,
+    String matKhau,
+  ) async {
+    var map = {};
+    map['id_khachhang'] = idKhachHang;
+    map['matkhau'] = matKhau;
+
+    final response = await http.patch(
+        Uri.parse('https://cn-api.fteamlp.top/api/users/CapNhatMatKhau'),
+        body: map);
+    if (response.statusCode == 200) {
+      final data = jsonDecode(response.body);
+      if (data['error'] == true) {
+        Get.snackbar('Lỗi đổi mật khẩu!', data['message']);
+      }
+      return data['error'];
+    } else {
+      Get.snackbar('Lỗi khi tải dữ liệu!',
+          'Máy chủ phản hồi: ${response.statusCode}: ${response.reasonPhrase.toString()}');
+    }
+  }
+
+  //cập nhật hình khách hàng
+  static Future<bool?> fetchUpdateImage(
+    String idKhachHang,
+    String hinh,
+  ) async {
+    var map = {};
+    map['id_khachhang'] = idKhachHang;
+    map['hinh'] = hinh;
+
+    final response = await http.patch(
+        Uri.parse('https://cn-api.fteamlp.top/api/users/CapNhatHinhKH'),
+        body: map);
+    if (response.statusCode == 200) {
+      final data = jsonDecode(response.body);
+      if (data['error'] == true) {
+        Get.snackbar('Lỗi cập nhật hình!', data['message']);
+      }
+      return data['error'];
+    } else {
+      Get.snackbar('Lỗi khi tải dữ liệu!',
+          'Máy chủ phản hồi: ${response.statusCode}: ${response.reasonPhrase.toString()}');
+    }
+  }
+
+  //cập nhật thông tin khách hàng
+  static Future<bool?> fetchUpdateInfo(
+    String idKhachHang,
+    String soDienThoai,
+    String tenkhachHang,
+    String cccd,
+  ) async {
+    var map = {};
+    map['sodienthoai'] = idKhachHang;
+    map['tenkhachhang'] = tenkhachHang;
+    map['cccd'] = cccd;
+
+    final response = await http.patch(
+        Uri.parse(
+            'https://cn-api.fteamlp.top/api/users/updateUser/${idKhachHang}'),
+        body: map);
+    if (response.statusCode == 200) {
+      final data = jsonDecode(response.body);
+      if (data['error'] == true) {
+        Get.snackbar('Lỗi cập nhật thông tin!', data['message']);
+      }
+      return data['error'];
+    } else {
+      Get.snackbar('Lỗi khi tải dữ liệu!',
+          'Máy chủ phản hồi: ${response.statusCode}: ${response.reasonPhrase.toString()}');
+    }
+  }
+
   //Lấy thông tin 1 tài xế
   static Future<DriverModel?> fetchDriver(int id) async {
     final response = await http

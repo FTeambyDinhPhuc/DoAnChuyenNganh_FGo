@@ -4,12 +4,14 @@ import 'package:fgo/bindings/login_binding.dart';
 import 'package:fgo/bindings/register_binding.dart';
 import 'package:fgo/bindings/splash_binging.dart';
 import 'package:fgo/views/addorder/add_order_screen.dart';
+import 'package:fgo/views/changeimage/change_image_screen.dart';
 import 'package:fgo/views/changepassword/change_password_screen.dart';
 import 'package:fgo/views/home/home_screen.dart';
 import 'package:fgo/views/register/register_screen.dart';
 import 'package:fgo/views/selectlogin/select_login_screen.dart';
 import 'package:fgo/views/loginwithphonenumber/login_with_phonenumber_screen.dart';
 import 'package:fgo/views/splash/splash_screen.dart';
+import 'package:fgo/views/updateinfo/update_info_screen.dart';
 import 'package:get/get.dart';
 
 class RoutesClass {
@@ -20,6 +22,8 @@ class RoutesClass {
   static String register = "/register";
   static String addOrder = "/addorder";
   static String changePassword = "/changepassword";
+  static String updateInfo = "/updateinfo";
+  static String changeImage = "/changeimage";
 
   static List<GetPage> routes = [
     GetPage(
@@ -45,19 +49,29 @@ class RoutesClass {
         transitionDuration: const Duration(milliseconds: 300)),
     GetPage(
         name: register,
-        page: () => Register(),
+        page: () => const Register(),
         binding: RegisterBinding(),
         transition: Transition.rightToLeft,
         transitionDuration: const Duration(milliseconds: 300)),
     GetPage(
         name: addOrder,
-        page: () => AddOrderScreen(),
+        page: () => const AddOrderScreen(),
         binding: AddOrderBinding(),
         transition: Transition.downToUp,
         transitionDuration: const Duration(milliseconds: 300)),
     GetPage(
         name: changePassword,
-        page: () => ChangePassword(),
+        page: () => const ChangePassword(),
+        transition: Transition.rightToLeft,
+        transitionDuration: const Duration(milliseconds: 300)),
+    GetPage(
+        name: updateInfo,
+        page: () => const UpdateInfoScreen(),
+        transition: Transition.rightToLeft,
+        transitionDuration: const Duration(milliseconds: 300)),
+    GetPage(
+        name: changeImage,
+        page: () => const ChangeImageScreen(),
         transition: Transition.rightToLeft,
         transitionDuration: const Duration(milliseconds: 300)),
   ];

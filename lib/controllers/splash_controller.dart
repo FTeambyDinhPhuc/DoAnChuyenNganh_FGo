@@ -15,8 +15,8 @@ class SplashController extends GetxController {
     GoogleMapApiModel? googleMapApi =
         await FGoAppServices.fetchGoogleMapAPIKey();
     if (googleMapApi != null) {
-      await BaseSharedPreferences.remove('key_google_map');
-      await saveKeyGoogleMap(googleMapApi);
+      BaseSharedPreferences.remove('key_google_map');
+      saveKeyGoogleMap(googleMapApi);
       google_map_api_key =
           await BaseSharedPreferences.getString('key_google_map');
       checkLogin();
@@ -27,7 +27,9 @@ class SplashController extends GetxController {
 
   checkLogin() async {
     String idKhachHang = await BaseSharedPreferences.getString('id_khachhang');
-    if (idKhachHang != '') {
+    String passKhachHang =
+        await BaseSharedPreferences.getString('mk_khachhang');
+    if (idKhachHang != '' && passKhachHang != '') {
       Get.offNamed(RoutesClass.home);
     } else {
       Get.offNamed(RoutesClass.login);
