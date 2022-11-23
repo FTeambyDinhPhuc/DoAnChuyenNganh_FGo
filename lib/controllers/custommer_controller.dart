@@ -3,10 +3,8 @@ import 'package:fgo/models/custommer_model.dart';
 import 'package:fgo/services/fgo_app_services.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:image_picker/image_picker.dart';
 
 class CustommerController extends GetxController {
-  RxString currentAvatar = ''.obs;
   var isLoading = true.obs;
   CustommerModel? custommer;
 
@@ -21,7 +19,6 @@ class CustommerController extends GetxController {
 
   //Lấy thông tin tài khoản
   getCustommer(int id) async {
-    isLoading.value = true;
     custommer = await FGoAppServices.fetchCustommer(id);
     if (custommer != null) {
       isLoading.value = false;
@@ -185,14 +182,5 @@ class CustommerController extends GetxController {
         ),
       );
     }
-  }
-
-  Future setImage() async {
-    final image = await ImagePicker().pickImage(source: ImageSource.gallery);
-    if (image == null) return;
-    print('trả về chổ này: ${image.path}');
-
-    currentAvatar.value = 'assets/images/bongocat.gif';
-    //print('hinh hien tai: ${custommerList[0].hinh}');
   }
 }

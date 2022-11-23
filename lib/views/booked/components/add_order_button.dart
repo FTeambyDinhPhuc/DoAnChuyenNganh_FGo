@@ -19,6 +19,13 @@ class AddOrderButton extends StatelessWidget {
           child: Container(
             padding: const EdgeInsets.all(defaultPadding),
             decoration: BoxDecoration(
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.shade400,
+                  spreadRadius: 1.0,
+                  blurRadius: 10,
+                ),
+              ],
               color: Theme.of(context).primaryColor,
               shape: BoxShape.circle,
             ),

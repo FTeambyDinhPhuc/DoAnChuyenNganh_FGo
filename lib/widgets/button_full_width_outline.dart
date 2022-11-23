@@ -19,7 +19,7 @@ class ButtonFullWidthOutline extends StatelessWidget {
         style: TextStyle(color: color),
       ),
       shape: RoundedRectangleBorder(
-          side: BorderSide(color: borderColor),
+          side: BorderSide(color: borderColor, width: 2.0),
           borderRadius: BorderRadius.circular(defaultCircular)),
       onPressed: press as void Function(),
     );

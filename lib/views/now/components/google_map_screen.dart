@@ -4,7 +4,6 @@ import 'package:fgo/controllers/order_controller.dart';
 import 'package:fgo/widgets/ticket/ticket.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_state_manager/src/simple/list_notifier.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class GoogleMapScreen extends StatefulWidget {
@@ -38,7 +37,6 @@ class _GoogleMapScreenState extends State<GoogleMapScreen> {
   void initState() {
     _locationController
         .getDriverLocation(_orderController.startingOrderList![0].idTaixe!);
-    _locationController.getcurrentLocation();
     super.initState();
   }
 
@@ -76,16 +74,10 @@ class _GoogleMapScreenState extends State<GoogleMapScreen> {
                     _locationController.driverLongiTude.value),
                 zoom: 16),
             markers: {
-              _orderController.startingOrderList![0].trangthai != statusBooked
-                  ? Marker(
-                      markerId: MarkerId("driverLocation"),
-                      position: LatLng(_locationController.driverLatiTude.value,
-                          _locationController.driverLongiTude.value))
-                  : Marker(
-                      markerId: MarkerId("currentLocation"),
-                      position: LatLng(
-                          _locationController.currentLatiTude.value,
-                          _locationController.currentLatiTude.value)),
+              Marker(
+                  markerId: MarkerId("driverLocation"),
+                  position: LatLng(_locationController.driverLatiTude.value,
+                      _locationController.driverLongiTude.value))
             },
             onMapCreated: (mapController) {
               _locationController.googleController.complete(mapController);

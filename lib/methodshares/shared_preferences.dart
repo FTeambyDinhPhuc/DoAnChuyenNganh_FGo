@@ -19,9 +19,20 @@ class BaseSharedPreferences {
     return preferences.setDouble(key, value);
   }
 
-  static Future<double?> getDoubleValue(String key) async {
+  static Future<double> getDoubleValue(String key) async {
     final preferences = await SharedPreferences.getInstance();
-    final value = preferences.getDouble(key);
+    final value = preferences.getDouble(key) ?? 0.0;
+    return value;
+  }
+
+  static Future<bool> setIntValue(String key, int value) async {
+    final preferences = await SharedPreferences.getInstance();
+    return preferences.setInt(key, value);
+  }
+
+  static Future<int> getIntValue(String key) async {
+    final preferences = await SharedPreferences.getInstance();
+    final value = preferences.getInt(key) ?? 0;
     return value;
   }
 

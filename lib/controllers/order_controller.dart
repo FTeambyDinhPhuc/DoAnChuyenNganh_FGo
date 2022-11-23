@@ -101,7 +101,7 @@ class OrderController extends GetxController {
   }
 
   //thêm đơn
-  AddOrder(
+  Future<bool> AddOrder(
     String idKhachhang,
     String diemDon,
     String diemDen,
@@ -119,10 +119,10 @@ class OrderController extends GetxController {
         quangDuong,
         totalMoney.value.toString());
     if (!addOrderError!) {
-      Get.back();
-      Get.snackbar(titleSnackbarOrder, 'Đặt chuyến đi thành công');
-    } else
-      print("Đặt chuyến lỗi!");
+      return true;
+    } else {
+      return false;
+    }
   }
 
   //hủy đơn
@@ -130,9 +130,9 @@ class OrderController extends GetxController {
     var cancelOrderSuccess = await FGoAppServices.fetchCancelOrder(idChuyenXe);
     if (cancelOrderSuccess == 1) {
       Get.back();
-      Get.snackbar(titleSnackbarOrder, 'Hủy chuyến đi thành công');
+      Get.snackbar(titleSnackbarOrder, 'Đã gữi yêu cầu hủy chuyến');
     } else {
-      print("Hủy chuyến lỗi!");
+      print("Gữi yêu cầu hủy chuyến lỗi!");
     }
   }
 

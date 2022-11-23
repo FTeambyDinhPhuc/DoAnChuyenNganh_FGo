@@ -5,14 +5,14 @@ import 'package:get/get.dart';
 
 class CarController extends GetxController {
   var isLoading = true.obs;
-  CarModel? car;
+  RxList<CarModel>? carList;
 
   //Lấy thông tin tài khoản tài xế
   getCar(int id) async {
-    car = await FGoAppServices.fetchCar(id);
-    if (car != null) {
+    var list = await FGoAppServices.fetchCar(id);
+    if (list != null) {
+      carList = list.obs;
       isLoading.value = false;
-    } else
-      print("Dữ liệu tài khoản chưa được đổ vào!");
+    }
   }
 }

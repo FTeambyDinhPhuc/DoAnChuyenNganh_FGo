@@ -25,6 +25,7 @@ class TextFiledChangeInfo extends StatelessWidget {
             top: defaultPadding * 2.5, bottom: defaultPadding * 1.5),
         child: Column(children: [
           TextFieldWithIcon(
+            chiDoc: true,
             controller: _custommerController.sodienthoaiController,
             text: "Số điện thoại",
             icon: FontAwesomeIcons.lock,

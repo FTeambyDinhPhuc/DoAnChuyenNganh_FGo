@@ -33,6 +33,14 @@ class _AddOrderScreenState extends State<AddOrderScreen> {
   }
 
   @override
+  void dispose() {
+    _orderController.totalMoney.value = 0;
+    _placeController.distance.value = 0;
+    _orderController.selectQuantity.value = 0;
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -168,15 +176,30 @@ class _AddOrderScreenState extends State<AddOrderScreen> {
                                     top: defaultPadding * 3),
                                 child: ButtonFullWidth(
                                   text: 'Đặt xe',
-                                  press: () {
-                                    _orderController.AddOrder(
-                                        _homeController.idCustommer.value,
-                                        _placeController.idSourceLocation.value,
-                                        _placeController
-                                            .idDestinationLocation.value,
-                                        _placeController.districtSource,
-                                        _placeController.distance.value
-                                            .toString());
+                                  press: () async {
+                                    if (_orderController.totalMoney != 0 &&
+                                        _placeController.distance != 0) {
+                                      bool ktDatDon =
+                                          await _orderController.AddOrder(
+                                              _homeController.idCustommer.value,
+                                              _placeController
+                                                  .idSourceLocation.value,
+                                              _placeController
+                                                  .idDestinationLocation.value,
+                                              _placeController.districtSource,
+                                              _placeController.distance.value
+                                                  .toString());
+                                      if (ktDatDon) {
+                                        Get.back();
+                                        Get.snackbar(titleSnackbarOrder,
+                                            'Đặt chuyến đi thành công');
+                                      } else {
+                                        print("Đặt chuyến lỗi!");
+                                      }
+                                    } else {
+                                      Get.snackbar(titleSnackbarOrder,
+                                          'Bạn chưa xác nhận đơn');
+                                    }
                                   },
                                 ),
                               )

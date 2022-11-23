@@ -14,12 +14,13 @@ class BookedScreen extends StatefulWidget {
 }
 
 class _BookedScreenState extends State<BookedScreen> {
-  var _controller = Get.put(OrderController());
+  var _orderController = Get.put(OrderController());
   var _homeController = Get.find<HomeController>();
   @override
   void initState() {
     super.initState();
-    _controller.getBookedOrder(int.parse(_homeController.idCustommer.value));
+    _orderController
+        .getBookedOrder(int.parse(_homeController.idCustommer.value));
   }
 
   @override
@@ -35,7 +36,7 @@ class _BookedScreenState extends State<BookedScreen> {
             style: Theme.of(context).textTheme.headline2,
           ),
         ),
-        Obx(() => _controller.isLoadingBookedScreen.value
+        Obx(() => _orderController.isLoadingBookedScreen.value
             ? Expanded(
                 child: Center(
                   child: CircularProgressIndicator(
@@ -43,7 +44,7 @@ class _BookedScreenState extends State<BookedScreen> {
                           AlwaysStoppedAnimation<Color>(Colors.blue.shade200)),
                 ),
               )
-            : _controller.bookedOrderList!.length == 0
+            : _orderController.bookedOrderList!.length == 0
                 ? Expanded(
                     child: Stack(children: [
                       Center(
@@ -66,11 +67,11 @@ class _BookedScreenState extends State<BookedScreen> {
                       children: [
                         RefreshIndicator(
                           onRefresh: () async {
-                            _controller.getBookedOrder(
+                            _orderController.getBookedOrder(
                                 int.parse(_homeController.idCustommer.value));
                           },
                           child: ListOrder(
-                            list: _controller.bookedOrderList!,
+                            list: _orderController.bookedOrderList!,
                           ),
                         ),
                         AddOrderButton(),

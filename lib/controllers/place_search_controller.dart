@@ -58,17 +58,6 @@ class PlaceSearchController extends GetxController {
     return Place.fromJson(jsonResult);
   }
 
-  // //lấy ra danh sách địa chỉ gợi ý của điểm đón
-  // searchEndPlaces() async {
-  //   searchResultsEnd.value = await getAutocomplete(endAddressController.text);
-  // }
-
-  // //lấy ra danh sách địa chỉ gợi ý của điểm đến
-  // searchStrartingPlaces() async {
-  //   searchResultsStrarting.value =
-  //       await getAutocomplete(startingAddressController.text);
-  // }
-
   //Lấy danh sách địa chỉ gợi ý từ google api
   getListPlaces(RxList<PlaceSearch> list, String value) async {
     list.value = await getAutocomplete(value);

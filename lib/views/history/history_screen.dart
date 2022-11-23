@@ -13,12 +13,13 @@ class HistoryScreen extends StatefulWidget {
 }
 
 class _HistoryScreenState extends State<HistoryScreen> {
-  var _controller = Get.put(OrderController());
+  var _orderController = Get.put(OrderController());
   var _homeController = Get.find<HomeController>();
   @override
   void initState() {
     super.initState();
-    _controller.getHistoryOrder(int.parse(_homeController.idCustommer.value));
+    _orderController
+        .getHistoryOrder(int.parse(_homeController.idCustommer.value));
   }
 
   @override
@@ -34,7 +35,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
             style: Theme.of(context).textTheme.headline2,
           ),
         ),
-        Obx(() => _controller.isLoadingHistoryScreen.value
+        Obx(() => _orderController.isLoadingHistoryScreen.value
             ? Expanded(
                 child: Center(
                   child: CircularProgressIndicator(
@@ -42,7 +43,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
                           AlwaysStoppedAnimation<Color>(Colors.blue.shade200)),
                 ),
               )
-            : _controller.historyOrderList!.length == 0
+            : _orderController.historyOrderList!.length == 0
                 ? Expanded(
                     child: Center(
                       child: Column(
@@ -60,11 +61,11 @@ class _HistoryScreenState extends State<HistoryScreen> {
                 : Expanded(
                     child: RefreshIndicator(
                       onRefresh: () async {
-                        _controller.getHistoryOrder(
+                        _orderController.getHistoryOrder(
                             int.parse(_homeController.idCustommer.value));
                       },
                       child: ListOrder(
-                        list: _controller.historyOrderList!,
+                        list: _orderController.historyOrderList!,
                       ),
                     ),
                   )),

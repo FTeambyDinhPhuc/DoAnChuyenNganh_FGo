@@ -98,7 +98,7 @@ class _TicketState extends State<Ticket> {
             diemDen: diemDen,
             custommer: _custommerController.custommer,
             driver: _driverController.driver,
-            car: _carController.car,
+            car: _carController.carList?[0],
           );
         }));
       },
@@ -154,7 +154,7 @@ class _TicketState extends State<Ticket> {
   }
 
   Future<dynamic> _RatingOrder(BuildContext context) {
-    double diemDanhGia = 3;
+    double diemDanhGia = 3.0;
     return showDialog(
       context: context,
       builder: (context) => AlertDialog(
@@ -170,8 +170,8 @@ class _TicketState extends State<Ticket> {
               style: Theme.of(context).textTheme.headline6,
             ),
             RatingBar.builder(
-                minRating: 1,
-                initialRating: 3,
+                minRating: 1.0,
+                initialRating: 3.0,
                 itemBuilder: (context, index) => Icon(
                       Icons.star,
                       color: Colors.amber,
