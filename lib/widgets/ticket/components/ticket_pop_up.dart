@@ -1,33 +1,20 @@
 import 'package:fgo/constants.dart';
-import 'package:fgo/controllers/order_controller.dart';
 import 'package:fgo/models/car_model.dart';
 import 'package:fgo/models/custommer_model.dart';
 import 'package:fgo/models/driver_model.dart';
 import 'package:fgo/models/order_model.dart';
-import 'package:fgo/widgets/button_full_width.dart';
 import 'package:fgo/widgets/ticket/components/color_ticket.dart';
-import 'package:fgo/widgets/ticket/components/info_base.dart';
 import 'package:fgo/widgets/ticket/components/info_order.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
 class TicketPopup extends StatelessWidget {
   TicketPopup(
-      {Key? key,
-      required this.order,
-      required this.orderController,
-      required this.diemDon,
-      required this.diemDen,
-      this.custommer,
-      this.driver,
-      this.car})
+      {Key? key, required this.order, this.custommer, this.driver, this.car})
       : super(key: key);
   final OrderModel order;
-  final OrderController orderController;
-  RxString diemDon;
-  RxString diemDen;
+
   CustommerModel? custommer;
   DriverModel? driver;
   CarModel? car;
@@ -142,11 +129,11 @@ class TicketPopup extends StatelessWidget {
                         ),
                         InfoOrder(
                           titleInfo: 'Điểm đón',
-                          describe: diemDon.value,
+                          describe: order.tendiemdon,
                         ),
                         InfoOrder(
                           titleInfo: 'Điểm đến',
-                          describe: diemDen.value,
+                          describe: order.tendiemden,
                         ),
                         InfoOrder(
                           titleInfo: 'Ngày bắt đầu',

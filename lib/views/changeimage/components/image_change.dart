@@ -21,8 +21,7 @@ class ImageChange extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        _custommerController.updateImage(
-            _homeController.idCustommer.value, _hinh);
+        _custommerController.updateImage(_homeController.idCustommer, _hinh);
       },
       child: Container(
         child: Image.network(_hinh),

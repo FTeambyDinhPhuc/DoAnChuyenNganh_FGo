@@ -18,8 +18,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
   @override
   void initState() {
     super.initState();
-    _orderController
-        .getHistoryOrder(int.parse(_homeController.idCustommer.value));
+    _orderController.getHistoryOrder(int.parse(_homeController.idCustommer));
   }
 
   @override
@@ -62,7 +61,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
                     child: RefreshIndicator(
                       onRefresh: () async {
                         _orderController.getHistoryOrder(
-                            int.parse(_homeController.idCustommer.value));
+                            int.parse(_homeController.idCustommer));
                       },
                       child: ListOrder(
                         list: _orderController.historyOrderList!,

@@ -4,12 +4,16 @@ import 'package:get/get.dart';
 import 'package:fgo/methodshares/shared_preferences.dart';
 
 class HomeController extends GetxController {
-  var idCustommer = ''.obs;
-  var passCustommer = ''.obs;
+  String idCustommer = '';
+  String passCustommer = '';
+  var disposeHome = true.obs;
 
   getIdCustommer() async {
-    idCustommer.value = await BaseSharedPreferences.getString('id_khachhang');
-    passCustommer.value = await BaseSharedPreferences.getString('mk_khachhang');
+    idCustommer = await BaseSharedPreferences.getString('id_khachhang');
+    passCustommer = await BaseSharedPreferences.getString('mk_khachhang');
+    if (idCustommer != '' && passCustommer != '') {
+      disposeHome.value = false;
+    }
   }
 
   logout() async {

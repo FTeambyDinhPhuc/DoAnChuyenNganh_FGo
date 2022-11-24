@@ -17,14 +17,14 @@ class LocationController extends GetxController {
   //dùng kéo vị trí tài xế
   bool stopGetLocationDriver = true;
 
-  //Lấy danh sách đơn hàng gợi ý
+  //Lấy vị trí tài xế
   getDriverLocation(int idTaiXe) async {
     stopGetLocationDriver = false;
     Timer.periodic(Duration(seconds: 2), (timer) async {
-      var taiXe = await FGoAppServices.fetchDriver(idTaiXe);
-      if (taiXe != null) {
-        driverLatiTude.value = taiXe.vido ?? 0.0;
-        driverLongiTude.value = taiXe.kinhdo ?? 0.0;
+      var _taiXe = await FGoAppServices.fetchDriver(idTaiXe);
+      if (_taiXe != null) {
+        driverLatiTude.value = _taiXe.vido ?? 0.0;
+        driverLongiTude.value = _taiXe.kinhdo ?? 0.0;
       }
       print("Đang kéo vị trí tài xế");
       if (stopGetLocationDriver == true) {

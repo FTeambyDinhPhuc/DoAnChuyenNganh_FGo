@@ -3,9 +3,7 @@ import 'package:fgo/controllers/car_controller.dart';
 import 'package:fgo/controllers/custommer_controller.dart';
 import 'package:fgo/controllers/driver_controller.dart';
 import 'package:fgo/controllers/order_controller.dart';
-import 'package:fgo/controllers/place_search_controller.dart';
 import 'package:fgo/models/order_model.dart';
-import 'package:fgo/models/place.dart';
 import 'package:fgo/methodshares/hero_dialog_route.dart';
 import 'package:fgo/widgets/ticket/components/action_order.dart';
 import 'package:fgo/widgets/ticket/components/info_base.dart';
@@ -30,31 +28,12 @@ class _TicketState extends State<Ticket> {
   var _custommerController = Get.put(CustommerController());
   var _driverController = Get.put(DriverController());
   var _carController = Get.put(CarController());
-  var _placeController = Get.put(PlaceSearchController());
   var _orderController = Get.put(OrderController());
-
-  var diemDon = ''.obs;
-  var diemDen = ''.obs;
-
-  getDiaDiem() async {
-    Place placeDiemDon = await _placeController.getPlace(order.diemdon);
-    Place placeDiemDen = await _placeController.getPlace(order.diemden);
-    if (placeDiemDon != null) {
-      diemDon.value = placeDiemDon.name;
-    } else {
-      print('Không lấy được điểm đón!');
-    }
-    if (placeDiemDen != null) {
-      diemDen.value = placeDiemDen.name;
-    } else {
-      print('Không lấy được điểm đến!');
-    }
-  }
 
   @override
   void initState() {
     _custommerController.getCustommer(order.idKhachhang);
-    getDiaDiem();
+
     if (order.idTaixe != null) {
       _driverController.getDriver(order.idTaixe!);
       _carController.getCar(order.idTaixe!);
@@ -67,9 +46,7 @@ class _TicketState extends State<Ticket> {
     return Obx(() => order.idTaixe != null
         ? _driverController.isLoading.value ||
                 _carController.isLoading.value ||
-                _custommerController.isLoading.value ||
-                diemDon == '' ||
-                diemDen == ''
+                _custommerController.isLoading.value
             ? Center(
                 child: Image.asset(
                   'assets/images/loading.gif',
@@ -77,7 +54,7 @@ class _TicketState extends State<Ticket> {
                 ),
               )
             : mainTicket(context)
-        : _custommerController.isLoading.value || diemDon == '' || diemDen == ''
+        : _custommerController.isLoading.value
             ? Center(
                 child: Image.asset(
                   'assets/images/loading.gif',
@@ -93,9 +70,6 @@ class _TicketState extends State<Ticket> {
         Navigator.of(context).push(HeroDialogRoute(builder: (context) {
           return TicketPopup(
             order: order,
-            orderController: _orderController,
-            diemDon: diemDon,
-            diemDen: diemDen,
             custommer: _custommerController.custommer,
             driver: _driverController.driver,
             car: _carController.carList?[0],
@@ -112,11 +86,7 @@ class _TicketState extends State<Ticket> {
             padding: EdgeInsets.all(defaultPadding),
             child: Column(
               children: [
-                InfoBase(
-                  diemDen: diemDen,
-                  order: order,
-                  driver: _driverController.driver,
-                ),
+                InfoBase(order: order),
                 order.trangthai == statusWaitForConfirmation
                     ? ActionOrder(
                         title: 'Hủy chuyến',

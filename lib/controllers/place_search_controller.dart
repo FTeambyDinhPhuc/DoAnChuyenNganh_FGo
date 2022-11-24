@@ -73,7 +73,7 @@ class PlaceSearchController extends GetxController {
   }
 
   //set vị trí đón
-  setViTriDon() async {
+  Future<bool> setViTriDon() async {
     Place place = await getPlace(idSourceLocation.value);
     sourceLatiTude = place.geometry.location.lat;
     sourceLongiTude = place.geometry.location.lng;
@@ -83,20 +83,26 @@ class PlaceSearchController extends GetxController {
       for (int j = 0; j < listTypes.length; j++) {
         if (listTypes[j].toString() == typeDistrict) {
           districtSource = listComponents[i].longName;
+          return true;
         }
       }
     }
+    return false;
   }
 
   //set vị trí đến
-  setViTriDen() async {
+  Future<bool> setViTriDen() async {
     Place place = await getPlace(idDestinationLocation.value);
     destinationLatiTude = place.geometry.location.lat;
     destinationLongtiTude = place.geometry.location.lng;
+    if (destinationLatiTude != 0.0 && destinationLongtiTude != 0.0) {
+      return true;
+    }
+    return false;
   }
 
   //lấy các điểm từ trên đường từ vị trí source đến destination
-  getPolyPoints() async {
+  Future<bool> getPolyPoints() async {
     polylineCoordinates.clear();
     PolylinePoints polylinePoints = PolylinePoints();
     PolylineResult result = await polylinePoints.getRouteBetweenCoordinates(
@@ -107,7 +113,9 @@ class PlaceSearchController extends GetxController {
     if (result.points.isNotEmpty) {
       result.points.forEach((PointLatLng point) =>
           polylineCoordinates.add(LatLng(point.latitude, point.longitude)));
+      return true;
     }
+    return false;
   }
 
   //cộng 2 vector trả về km

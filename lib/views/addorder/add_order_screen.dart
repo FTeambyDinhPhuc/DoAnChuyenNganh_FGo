@@ -128,39 +128,26 @@ class _AddOrderScreenState extends State<AddOrderScreen> {
                                       _orderController.bookingTimeController
                                           .text.isNotEmpty &&
                                       _orderController.selectQuantity != 0) {
-                                    await _placeController.setViTriDon();
-                                    await _placeController.setViTriDen();
-                                    await _placeController.getPolyPoints();
-                                    _placeController.tinhQuangDuong();
-                                    _orderController.tinhTien(
-                                        _placeController.distance.value);
+                                    bool ktSetViTriDon =
+                                        await _placeController.setViTriDon();
+                                    bool ktSetViTriDen =
+                                        await _placeController.setViTriDen();
+                                    if (ktSetViTriDon & ktSetViTriDen) {
+                                      bool ktLayDoanDuong =
+                                          await _placeController
+                                              .getPolyPoints();
+                                      if (ktLayDoanDuong) {
+                                        _placeController.tinhQuangDuong();
+                                        _orderController.tinhTien(
+                                            _placeController.distance.value);
+                                      }
+                                    } else {
+                                      Get.snackbar(titleSnackbarOrder,
+                                          'Vui lòng nhập lại thông tin');
+                                    }
                                   } else {
-                                    showDialog(
-                                      context: context,
-                                      builder: (context) => AlertDialog(
-                                        title: Text(
-                                          'Bạn nhập thiếu thông tin!',
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .headline4,
-                                        ),
-                                        content: Text(
-                                          'Vui lòng nhập lại',
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .headline6,
-                                        ),
-                                        actions: [
-                                          TextButton(
-                                              onPressed: () {
-                                                Get.back();
-                                              },
-                                              child: Text(
-                                                'Đồng ý',
-                                              )),
-                                        ],
-                                      ),
-                                    );
+                                    Get.snackbar(titleSnackbarOrder,
+                                        'Bạn nhập thiếu thông tin\nVui lòng nhập lại');
                                   }
                                 },
                               ),
@@ -181,11 +168,16 @@ class _AddOrderScreenState extends State<AddOrderScreen> {
                                         _placeController.distance != 0) {
                                       bool ktDatDon =
                                           await _orderController.AddOrder(
-                                              _homeController.idCustommer.value,
+                                              _homeController.idCustommer,
                                               _placeController
                                                   .idSourceLocation.value,
                                               _placeController
+                                                  .startingAddressController
+                                                  .text,
+                                              _placeController
                                                   .idDestinationLocation.value,
+                                              _placeController
+                                                  .endAddressController.text,
                                               _placeController.districtSource,
                                               _placeController.distance.value
                                                   .toString());

@@ -49,7 +49,7 @@ class CustommerController extends GetxController {
     if (matkhaucuController.text.isNotEmpty &&
         matkhaumoiController.text.isNotEmpty &&
         xacnhanmatkhaumoiController.text.isNotEmpty) {
-      if (matkhaucuController.text != _homeController.passCustommer.value) {
+      if (matkhaucuController.text != _homeController.passCustommer) {
         showDialog(
           context: context,
           builder: (context) => AlertDialog(

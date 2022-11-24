@@ -19,8 +19,7 @@ class _BookedScreenState extends State<BookedScreen> {
   @override
   void initState() {
     super.initState();
-    _orderController
-        .getBookedOrder(int.parse(_homeController.idCustommer.value));
+    _orderController.getBookedOrder(int.parse(_homeController.idCustommer));
   }
 
   @override
@@ -68,7 +67,7 @@ class _BookedScreenState extends State<BookedScreen> {
                         RefreshIndicator(
                           onRefresh: () async {
                             _orderController.getBookedOrder(
-                                int.parse(_homeController.idCustommer.value));
+                                int.parse(_homeController.idCustommer));
                           },
                           child: ListOrder(
                             list: _orderController.bookedOrderList!,

@@ -41,7 +41,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                     text: "Xác nhận",
                     press: () {
                       _custommerController.updatePass(
-                          _homeController.idCustommer.value,
+                          _homeController.idCustommer,
                           context,
                           _homeController);
                     }),

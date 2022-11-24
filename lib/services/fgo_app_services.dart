@@ -223,7 +223,9 @@ class FGoAppServices {
   static Future<bool?> fetchAddOrder(
     String idKhachhang,
     String diemDon,
+    String tenDiemDon,
     String diemDen,
+    String tenDiemDen,
     String khuVucDon,
     String ngayDon,
     String gioDon,
@@ -234,7 +236,9 @@ class FGoAppServices {
     var map = {};
     map['id_khachhang'] = idKhachhang;
     map['diemdon'] = diemDon;
+    map['tendiemdon'] = tenDiemDon;
     map['diemden'] = diemDen;
+    map['tendiemden'] = tenDiemDen;
     map['khuvucdon'] = khuVucDon;
     map['ngaydon'] = ngayDon;
     map['giodon'] = gioDon;

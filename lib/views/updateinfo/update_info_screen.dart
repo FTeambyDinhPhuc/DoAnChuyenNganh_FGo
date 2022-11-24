@@ -40,7 +40,7 @@ class _UpdateInfoScreenState extends State<UpdateInfoScreen> {
                     text: "Xác nhận",
                     press: () {
                       _custommerController.updateInfo(
-                        _homeController.idCustommer.value,
+                        _homeController.idCustommer,
                         context,
                       );
                     }),

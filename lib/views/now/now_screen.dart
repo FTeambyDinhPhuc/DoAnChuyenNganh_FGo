@@ -21,8 +21,7 @@ class _NowScreenState extends State<NowScreen> {
   @override
   void initState() {
     super.initState();
-    _orderController.getStartingOrder(
-        int.parse(_homeController.idCustommer.value),
+    _orderController.getStartingOrder(int.parse(_homeController.idCustommer),
         DateFormat("dd-MM-yyyy").format(DateTime.now()));
   }
 

@@ -104,14 +104,18 @@ class OrderController extends GetxController {
   Future<bool> AddOrder(
     String idKhachhang,
     String diemDon,
+    String tenDiemDon,
     String diemDen,
+    String tenDiemDen,
     String khuVucDon,
     String quangDuong,
   ) async {
     bool? addOrderError = await FGoAppServices.fetchAddOrder(
         idKhachhang,
         diemDon,
+        tenDiemDon,
         diemDen,
+        tenDiemDen,
         khuVucDon,
         bookingDateController.text,
         bookingTimeController.text,

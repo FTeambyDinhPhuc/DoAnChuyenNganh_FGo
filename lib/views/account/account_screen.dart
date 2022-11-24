@@ -22,8 +22,7 @@ class _AccountScreenState extends State<AccountScreen> {
   @override
   void initState() {
     super.initState();
-    _custommerController
-        .getCustommer(int.parse(_homeController.idCustommer.value));
+    _custommerController.getCustommer(int.parse(_homeController.idCustommer));
   }
 
   @override
@@ -72,7 +71,6 @@ class _AccountScreenState extends State<AccountScreen> {
                         InfoAccount(custommerController: _custommerController),
                         const SizedBox(height: defaultPadding * 2),
                         ActionButton(
-                          custommerController: _custommerController,
                           homeController: _homeController,
                         )
                       ],

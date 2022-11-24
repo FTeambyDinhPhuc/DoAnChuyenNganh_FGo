@@ -1,6 +1,5 @@
 import 'package:fgo/constants.dart';
 import 'package:fgo/controllers/custommer_controller.dart';
-import 'package:fgo/widgets/pass_text_field_with_icon.dart';
 import 'package:fgo/widgets/text_field_with_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
