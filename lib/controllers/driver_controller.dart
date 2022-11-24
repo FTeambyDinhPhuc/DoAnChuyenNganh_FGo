@@ -3,15 +3,13 @@ import 'package:fgo/services/fgo_app_services.dart';
 import 'package:get/get.dart';
 
 class DriverController extends GetxController {
-  var isLoading = true.obs;
-  DriverModel? driver;
-
   //Lấy thông tin tài khoản tài xế
-  getDriver(int id) async {
-    driver = await FGoAppServices.fetchDriver(id);
+  Future<DriverModel?> getDriver(int id) async {
+    DriverModel? driver = await FGoAppServices.fetchDriver(id);
     if (driver != null) {
-      isLoading.value = false;
+      return driver;
     } else
       print("Dữ liệu tài khoản chưa được đổ vào!");
+    return null;
   }
 }

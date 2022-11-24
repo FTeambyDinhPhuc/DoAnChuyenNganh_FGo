@@ -3,6 +3,8 @@ import 'package:fgo/controllers/car_controller.dart';
 import 'package:fgo/controllers/custommer_controller.dart';
 import 'package:fgo/controllers/driver_controller.dart';
 import 'package:fgo/controllers/order_controller.dart';
+import 'package:fgo/models/car_model.dart';
+import 'package:fgo/models/driver_model.dart';
 import 'package:fgo/models/order_model.dart';
 import 'package:fgo/methodshares/hero_dialog_route.dart';
 import 'package:fgo/widgets/ticket/components/action_order.dart';
@@ -30,23 +32,34 @@ class _TicketState extends State<Ticket> {
   var _carController = Get.put(CarController());
   var _orderController = Get.put(OrderController());
 
+  DriverModel? _driver;
+  List<CarModel>? _car;
+  var isloadingDriverAndCar = true.obs;
+
+  getDriverAndCar() async {
+    if (order.idTaixe != null) {
+      _driver = await _driverController.getDriver(order.idTaixe!);
+      _carController.getCar(order.idTaixe!);
+      _car = await _carController.getCar(order.idTaixe!);
+      if (_driver != null && _car != null) {
+        if (_car!.length != 0) {
+          isloadingDriverAndCar.value = false;
+        }
+      }
+    }
+  }
+
   @override
   void initState() {
     _custommerController.getCustommer(order.idKhachhang);
-
-    if (order.idTaixe != null) {
-      _driverController.getDriver(order.idTaixe!);
-      _carController.getCar(order.idTaixe!);
-    }
+    getDriverAndCar();
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return Obx(() => order.idTaixe != null
-        ? _driverController.isLoading.value ||
-                _carController.isLoading.value ||
-                _custommerController.isLoading.value
+        ? isloadingDriverAndCar.value || _custommerController.isLoading.value
             ? Center(
                 child: Image.asset(
                   'assets/images/loading.gif',
@@ -71,8 +84,8 @@ class _TicketState extends State<Ticket> {
           return TicketPopup(
             order: order,
             custommer: _custommerController.custommer,
-            driver: _driverController.driver,
-            car: _carController.carList?[0],
+            driver: _driver,
+            car: _car?[0],
           );
         }));
       },
